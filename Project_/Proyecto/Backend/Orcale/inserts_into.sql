@@ -305,7 +305,7 @@ INSERT INTO Restaurante (ID_Restaurante, Nombre, Direccion, Telefono, Email, Afo
 ', 'westhollywood@m&g.com', 70, '/Proyecto/Frontend/Web/src/products/backgrounds/west-hollywood-restaurant.png'),
 (5, 'Culver City', '6000 Sepulveda Blvd, Culver City, CA 90230', '213-200-4076', 'culvercity@m&g.com', 54, '/Proyecto/Frontend/Web/src/products/backgrounds/culver-city-restaurant.png');
 
-INSERT INTO usuarios (ID_Usuario, Nombre, Email, Contrasena, DNI, Telefono, Direccion) VALUES (5, 'Test User', 'test@mail.com', '1234', '2222', '437534344', 'Calle de la almendrilla');
+INSERT INTO Usuarios (ID_Usuario, Nombre, Email, Contrasena, DNI, Telefono, Direccion) VALUES (5, 'Test User', 'test@mail.com', '1234', '2222', '437534344', 'Calle de la almendrilla');
 
 INSERT INTO Empleados (ID_Empleado, ID_Restaurante, Nombre, Apellidos, DNI, Telefono, Sueldo, fechaContratacion) VALUES
 (1, 1, 'Anastasia', 'Gómez Pérez', '12345678L', '600112233', 1200.00, '2023-04-01');
