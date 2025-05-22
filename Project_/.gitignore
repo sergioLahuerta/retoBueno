@@ -1,0 +1,28 @@
+# 🌐 Frontend - HTML/CSS/JS
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Node (por si usan herramientas como npm para gestión de assets)
+
+
+# ⚙️ Java - Backend
+
+
+# Maven
+
+
+# IntelliJ / Eclipse / VS Code
+
+
+# 🛢️ Oracle - Archivos sensibles o conexiones
+
+
+# 🔒 General
+*.key
+*.pem
+*.crt
+*.env.local
+.env.*

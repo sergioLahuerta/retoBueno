@@ -1,0 +1,424 @@
+<!--PARA HACER:
+  1- Descargar fuente y meterla en otro css como en el video (Dalto)
+  2-
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" href="/Proyecto/Frontend/Web/src/icons/logo-favicon.png">
+      <link rel="stylesheet" href="../CSS/faq.css">
+      <script src="/Proyecto/Frontend/Web/JS/neonEffect.js" defer></script>
+      <script src="/Proyecto/Frontend/Web/JS/subMenuChanges.js" defer></script>
+      <script src="/Proyecto/Frontend/Web/JS/coockies.js" defer></script>
+      <script src="/Proyecto/Frontend/Web/JS/sign-up.js" defer></script>
+      <script src="/Proyecto/Frontend/Web/JS/footer.js" defer></script>
+      <title>Meat & Grill</title>
+  </head>
+  <body>
+    <!--Coockie banner-->
+    <div id="cookie-banner">
+      <p>HOW TO PROTECT YOUR PRIVACY</p>
+      <p class="coockie-text">To improve your experience on our platforms and to show you more relevant information, we use cookies and similar technologies, both owned by Meat&Grill and third parties, and data sent directly from our servers. For more information, check out our Privacy & Cookie Policy.</p>
+      <button id="accept-btn">Accept all</button>
+      <button id="reject-btn">Reject</button>
+    </div>
+
+    <!--Header barra superior-->
+    <header class="header">
+      <nav class="nav">
+        <div class="div-lists-items-left">
+          <ul class="ul-list-left">
+            <li class="list-item-ul-button-stripes">
+              <input type="checkbox" id="toggle-menu" class="input-checkbox" hidden>
+              <label for="toggle-menu" class="list-item-ul-button-stripes toggle-label">
+                <img src="../src/icons/threeStripesWhite.png" alt="" class="img-stripes-list-item">
+                <img src="../src/icons/threeStripesRed.png" alt="" class="img-stripes-list-item-hover">
+                <img src="../src/icons/crossWhite.png" alt="" class="cross-img-submenu">
+                <img src="../src/icons/crossRed.png" alt="" class="cross-img-submenu-hover">
+              </label>
+              <!-- //Mobil\\ Opciones click imagen threeStripes -->
+              <div class="see-more-container">
+                <!--<div class="header-container-submenu">
+                  <img src="/src/icons/faviconOriginal.png" alt="" class="img-icon-list-item">
+                </div>-->
+                <!--<hr class="header-submenu-hr">-->
+                <div class="see-more-content icon-hamburger">
+                  <a href="./menu.html" class="see-more-content-a">
+                    <p>Menu</p>
+                    <img src="../src/icons/hamburgerWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <!--<hr class="see-more-content-hr">-->
+                <div class="see-more-content icon-offers">
+                  <a href="./offers.html" class="see-more-content-a">
+                    <p>Offers</p>
+                    <img src="../src/icons/offersWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <!--<hr class="see-more-content-hr">-->
+                <div class="see-more-content icon-rewards">
+                  <a href="./rewards.html" class="see-more-content-a">
+                    <p>Rewards</p>
+                    <img src="../src/icons/rewardsWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <div class="see-more-content icon-find-your-restaurant">
+                  <a href="./restaurants.html" class="see-more-content-a">
+                    <p>Find your Restaurant</p>
+                    <img src="../src/icons/findYourRestaurantWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <div class="see-more-content contact-us">
+                  <a href="./contact-us.html" class="see-more-content-a">
+                    <p>Contact Us</p>
+                    <img src="../src/icons/contactUsWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <div class="see-more-content work-with-us">
+                  <a href="../HTML/work-with-us.html" class="see-more-content-a">
+                    <p>Work With Us</p>
+                    <img src="../src/icons/workWithUsWhite.png" alt="" class="img-icon-see-more-content">
+                  </a>
+                </div>
+                <div class="see-more-refers-container">
+                  <a href="./rewards.html#meatpoints" class="see-more-refer">Meat Points</a>
+                  <a href="./restaurants.html#coming-soon" class="see-more-refer">Coming Soon</a>
+                  <a href="./faq.html" class="see-more-refer">Frequently asked questions</a>
+                </div>
+              </div>                  
+            </li>
+            <li class="list-item-ul">Menu</li>
+            <li class="list-item-ul">Restaurants</li>
+            <li class="list-item-ul">Offers</li>
+          </ul>
+        </div>
+        <div class="div-lists-item-center">
+            <li class="list-item-ul-logo">
+                <a href="./index.html" class="a-img-list-item">
+                    <img src="../src/icons/logo-favicon.png" alt="" class="img-icon-list-item">
+                    <img src="../src/icons/logo-favicon-red.png" alt="" class="img-icon-list-item submenu">
+                </a>
+            </li>
+        </div>
+        <div class="div-lists-items-right">
+          <ul class="ul-list-right">
+            <a href="./about_us.html">
+              <li class="list-item-ul">Aboout Us</li>
+            </a>
+            <li class="list-item-ul-sign-up">
+              <img src="../src/icons/accessWhite.png" alt="" class="list-item-ul-access-img">
+              <img src="../src/icons/accessRed.png" alt="" class="list-item-ul-access-img-hover">
+              <div class="pannel-choice-hover-container">
+                <ul class="pannel-choice-hover-ul">
+                  <li id="sing-up-button" class="pannel-choice-hover-li li-up">Sign Up</li>
+                  <li id="login-up-button" class="pannel-choice-hover-li li-down">Log In</li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-item-ul-button-bag">
+              <button class="button-list-bag">
+                <img src="../src/icons/bagWhite.png" alt="" class="img-list-bag">
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!--Sección Sing up-->
+    <img src="../src/icons/crossWhite.png" id="signup-close-btn" class="signup-close-btn">
+    <div id="background-grey" class="background-layer-grey"></div>
+    <div id="signup-id" class="signup-section">
+      <div class="signup-container">
+        <img src="../src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
+        <div class="sign-up-info-container">
+          <h2 class="sign-up-info-title">M&G REWARDS ARE WAITING FOR YOU</h2>
+          <p class="sign-up-info-subtitle">Sign up to get discount codes, free shipping, exclusive products, and earn MeatPoints!</p>
+          <p class="sign-up-info-main-text">Register now. It's free!</p>
+        </div>
+        <form id="signup-form" method="POST" action="/login" class="sign-up-form">
+          <input type="email" id="signup-email" name="email" placeholder="Email" required class="sign-up-form-input">
+          <input type="password" id="signup-password" name="password" placeholder="Password" required class="sign-up-form-input">
+          <button type="submit" class="sign-up-form-button">Sign Up</button>
+          <div class="sign-up-policies-container">
+            <p class="sign-up-policies-title">PRIVACY NOTICE</p>
+            <p class="sign-up-policies-text">
+              Your personal data is provided to M&G mAg to create an Meat&Grill membership as described in the M&G Privacy Notice. Your registrationcannot be completed without your data. As part of your membership, Meat&Grill will send you personalized marketing messages about offersand products based on your M&G activities and engagement with Meat&Grill. You can unsubscribe at any time. By completing yourregistration, you have read the M&G Privacy Notice , understood your rights, and understood how adidas uses your data.</p>
+          </div>
+          <div class="sign-up-policies-container">
+            <p class="sign-up-policies-title">PERSONALIZED EMAIL MARKETING MESSAGES</p>
+            <p class="sign-up-policies-text">
+              Personalized marketing messages from adidas AG and adidas Espana SAU (“adidas”). I understand that as a member of the adiClub, adidas will use my email address and other personal data listed in the Privacy Notice to send me information about the adidas brand and its products based on my interests and preferences through in-app notifications as well as email marketing messages sent to the email address used to create this account. I understand that I can exercise my right to opt out of marketing emails at any time by using the unsubscribe button found in every email, changing my in-app notification preferences, or modifying my marketing communication preferences by logging into my profile or contacting adidas Customer Service for assistance.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+     <!--Sección Log In-->
+     <img src="../src/icons/crossWhite.png" id="login-close-btn" class="signup-close-btn">
+     <div id="background-grey" class="background-layer-grey"></div>
+     <div id="login-id" class="signup-section">
+       <div class="signup-container">
+         <img src="../src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
+         <div class="sign-up-info-container">
+           <h2 class="sign-up-info-title">WELCOME BACK TO M&G CLUB</h2>
+           <p class="sign-up-info-subtitle">Log in to get discount codes, free shipping, exclusive products, and earn MeatPoints!</p>
+         </div>
+         <form id="login-form" method="POST" action="/login" class="sign-up-form">
+           <input type="email" id="login-email" name="email" placeholder="Email" required class="sign-up-form-input">
+           <input type="password" id="login-password" name="password" placeholder="Password" required class="sign-up-form-input">
+           <button type="submit" class="sign-up-form-button">Log In</button>
+           <div class="sign-up-policies-container">
+             <p class="sign-up-policies-title">PRIVACY NOTICE</p>
+             <p class="sign-up-policies-text">
+               Your personal data is provided to M&G mAg to create an Meat&Grill membership as described in the M&G Privacy Notice. Your registrationcannot be completed without your data. As part of your membership, Meat&Grill will send you personalized marketing messages about offersand products based on your M&G activities and engagement with Meat&Grill. You can unsubscribe at any time. By completing yourregistration, you have read the M&G Privacy Notice , understood your rights, and understood how adidas uses your data.</p>
+           </div>
+           <div class="sign-up-policies-container">
+             <p class="sign-up-policies-title">PERSONALIZED EMAIL MARKETING MESSAGES</p>
+             <p class="sign-up-policies-text">
+               Personalized marketing messages from adidas AG and adidas Espana SAU (“adidas”). I understand that as a member of the adiClub, adidas will use my email address and other personal data listed in the Privacy Notice to send me information about the adidas brand and its products based on my interests and preferences through in-app notifications as well as email marketing messages sent to the email address used to create this account. I understand that I can exercise my right to opt out of marketing emails at any time by using the unsubscribe button found in every email, changing my in-app notification preferences, or modifying my marketing communication preferences by logging into my profile or contacting adidas Customer Service for assistance.</p>
+           </div>
+         </form>
+       </div>
+     </div>
+
+    <!--Display FAQ-->
+    <div class="our-faq-container">
+        <p class="our-faq-text">FAQ</p>
+    </div>
+
+    <!--FAQ-->
+    <section class="faq-section">
+      <!--Pregunta delivery time-->
+        <div class="faq-pannel-group">
+            <input type="checkbox" id="faq-delivery-time" class="faq-pannel-toggle">
+            <div class="faq-pannel-row">
+              <p class="faq-pannel-row-title">How long will it take to receive my order?</p>
+              <label for="faq-delivery-time" class="faq-pannel-row-link">
+                <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+                <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+              </label>
+            </div>
+            <div class="faq-pannel-drop-down">
+              <p>Our average delivery time is <strong>approximately 30 minutes.</strong> Occasionally, we may receive a large volume order before yours, which may delay your order preparation by 5-10 minutes. Our policies guarantee that the distribution of each order takes place immediately after it has been prepared, as we want to deliver you the best product, with the best quality and in the shortest possible time.</p>
+            </div>
+          </div>
+      <!--Pregunta mantener materia prima a temperatura adecuada-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-food-temp" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">How do you manage to keep the food hot and fresh during distribution?</p>
+            <label for="faq-food-temp" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>Our transport system was specially created to ensure that we keep our products hot and that they arrive at the right temperature for you to enjoy, regardless of the product.</p>
+          </div>
+        </div>
+        <!--Pregunta devoluciones-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-returns" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Can I return my order?</p>
+            <label for="faq-returns" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>We accept refund or return requests within 1 hour of receiving your order. Items must be unused and in their original condition. Please note that gift cards and perishable items are non-refundable. For assistance, contact our customer support team as soon as possible.</p>
+          </div>
+        </div>
+        <!--Pregunta alérgenos-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-allergens" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Are allergens indicated on the menu?</p>
+            <label for="faq-allergens" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>Yes, all allergens are clearly listed on our restaurant menu. If you have any questions or specific dietary concerns, feel free to ask any of our team members, they’ll be happy to help you make an informed choice.</p>
+          </div>
+        </div>
+        <!--Pregunta personalizar hamburguesa-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-custom-burger" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Can I customize my burger?</p>
+            <label for="faq-custom-burger" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>Of course! You can remove, change, or add ingredients to your liking from our digital menu. We want you to have exactly what you're craving.</p>
+          </div>
+        </div>
+        <!--Pregunta area no cubierta por nuestro servicio-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-deliver-area" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Why don't you deliver to my area?</p>
+            <label for="faq-deliver-area" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>We are expanding our service to other areas and cities as soon as possible, but we always try to ensure that we have all our operations in place to guarantee the delivery of the best service and the best products in the best conditions. For now, we are in LA but keep hungry because we will open soon in San Diego and Las Vegas too.</p>
+          </div>
+        </div>
+        <!--Pregunta coste del envío-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-delivery-cost" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Does the home delivery service cost?</p>
+            <label for="faq-delivery-cost" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>The delivery of the order may involve shipping costs or other costs which will be informed before the confirmation and payment of the order depending on the minimum amount established or other concepts. Anyways, you must know that all orders of minimum 30$ are free to delivery costs.</p>
+          </div>
+        </div>
+        <!--Pregunta display flex-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-display-flex" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">What is the "Display Flex" burger and why does it have a paper wrapper around it?</p>
+            <label for="faq-display-flex" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>The "Display Flex" is one of our most special burgers: it's wrapped in ultra-thin edible paper that lets you eat it without making a mess. This paper keeps the ingredients in place and can be chewed along with the burger, without altering the flavor. Ideal for those who don't want to stop even to clean their hands!</p>
+          </div>
+        </div>
+        <!--Pregunta productos veganos-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-vegan-products" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Do you have vegetarian or vegan options?</p>
+            <label for="faq-vegan-products" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>Yes, we offer 100% vegetarian and vegan burgers made with fresh and tasty ingredients. You can also customize any burger to suit your dietary needs.</p>
+          </div>
+        </div>
+        <!--Pregunta pedir desde movil-->
+        <div class="faq-pannel-group">
+          <input type="checkbox" id="faq-mobile-order" class="faq-pannel-toggle">
+          <div class="faq-pannel-row">
+            <p class="faq-pannel-row-title">Can I place an order from my mobile phone?</p>
+            <label for="faq-mobile-order" class="faq-pannel-row-link">
+              <img src="../src/icons/mas.png" alt="" class="faq-pannel-row-img">
+              <img src="../src/icons/menosFAQ.png" alt="" class="faq-pannel-row-img img-hover">
+            </label>
+          </div>
+          <div class="faq-pannel-drop-down">
+            <p>Yes. You can order from our website or from our official website, available on iOS and Android. Your burger is just a few clicks away!</p>
+          </div>
+        </div>
+    </section>
+
+      <!--Sección del footer-->
+      <section class="footer-section">
+        <div class="footer-container">
+          <p class="footer-title">Follow us & stay hungry for news</p>
+          <div class="footer-socialmedia-container">
+            <a class="footer-link-socialmedia" href="https://www.facebook.com/search/top/?q=Meet%20Grill%20US" rel="noopener noreferrer" target="_blank">
+              <img src="../src/icons/facebookRed.png" alt="" class="footer-socialmedia-icon">
+            </a>
+            <a class="footer-link-socialmedia">
+              <img src="../src/icons/instagramRed.png" alt="" class="footer-socialmedia-icon">
+            </a>
+            <a class="footer-link-socialmedia" href="https://x.com/MeatAndGrillUS" target="_blank">
+              <img src="../src/icons/twitterRed.png" alt="" class="footer-socialmedia-icon">
+            </a>
+            <a class="footer-link-socialmedia" href="https://www.tiktok.com/@meat_and_grill_usa" target="_blank">
+              <img src="../src/icons/tik-tokRed.png" alt="" class="footer-socialmedia-icon">
+            </a>
+          </div>
+        </div>
+        <img src="../src/products/backgrounds/footer.png" alt="" class="footer-promo-img">
+        <div class="footer-pannel-container">
+          <!-- Sección About Us -->
+          <div class="footer-pannel-group">
+            <input type="checkbox" id="toggle-about-us" class="footer-pannel-toggle">
+            <div class="footer-pannel-row">
+              <p class="footer-pannel-row-title">About Us</p>
+              <label for="toggle-about-us" class="footer-pannel-row-link">
+                <img src="../src/icons/mas.png" alt="" class="footer-pannel-row-img">
+                <img src="../src/icons/menos.png" alt="" class="footer-pannel-row-img img-hover">
+              </label>
+            </div>
+            <div class="footer-pannel-drop-down">
+              <a href="./faq.html">Sustainability</a>
+              <a href="./work-with-us.html#careers">Careers</a>
+              <a href="./work-with-us.html#partners">Partners & Collaborators</a>
+            </div>
+          </div>
+        
+          <!-- Sección Products & Services -->
+          <div class="footer-pannel-group">
+            <input type="checkbox" id="toggle-products-services" class="footer-pannel-toggle">
+            <div class="footer-pannel-row">
+              <p class="footer-pannel-row-title">Products & Services</p>
+              <label for="toggle-products-services" class="footer-pannel-row-link">
+                <img src="../src/icons/mas.png" alt="" class="footer-pannel-row-img">
+                <img src="../src/icons/menos.png" alt="" class="footer-pannel-row-img img-hover">
+              </label>
+            </div>
+            <div class="footer-pannel-drop-down">
+              <a href="./faq.html#faq-delivery-time">Shipping & Delivery</a>
+              <a href="./faq.html#faq-custom-burger">Custom Orders</a>
+              <a href="./offers.html">Special Offers</a>
+              <a href="./rewards.html#giftcard">Gift Cards</a>
+              <a href="./faq.html#faq-delivery-time">Allergen Info</a>
+            </div>
+          </div>
+          <!-- Sección Customer Support -->
+          <div class="footer-pannel-group">
+            <input type="checkbox" id="toggle-customer-support" class="footer-pannel-toggle">
+            <div class="footer-pannel-row">
+              <p class="footer-pannel-row-title">Customer Support</p>
+              <label for="toggle-customer-support" class="footer-pannel-row-link">
+                <img src="../src/icons/mas.png" alt="" class="footer-pannel-row-img">
+                <img src="../src/icons/menos.png" alt="" class="footer-pannel-row-img img-hover">
+              </label>
+            </div>
+            <div class="footer-pannel-drop-down">
+              <a href="./contact-us.html">Contact Us</a>
+              <a href="./faq.html">FAQ</a>
+              <a href="./faq.html#faq-returns">Refunds & Returns</a>
+              <a href="./work-with-us.html">Work With Us</a>
+            </div>
+          </div>
+        </div>
+        <hr class="footer-hr">
+        <div class="footer-below-pannel-legal-info">
+          <a href="./legal.html#privacy-policy" class="footer-legal-info-p">Privacy Policy</a>
+          <a href="./legal.html#california-privacy-policy" class="footer-legal-info-p">California Privacy Notice</a>
+          <a href="./legal.html#terms" class="footer-legal-info-p">Terms & Conditions</a>
+          <a href="./legal.html#accessibility" class="footer-legal-info-p">Accessibility</a>
+        </div>
+        <div class="footer-below-pannel-last-line-container">
+            <img src="../src/icons/logo-favicon.png" alt="" class="footer-below-pannel-img">
+            <p class="footer-legal-info-p">2025 Meat & Grill. All Rights Reserved</p>
+          </div>
+      </section>
+  </body>
+</html>
