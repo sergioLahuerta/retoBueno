@@ -51,11 +51,11 @@ public class Proveedores_Ingredientes {
     @Override
     public String toString() {
         return "Proveedores_Ingredientes{" +
-                "id_proveedorIngrediente=" + id_proveedorIngrediente +
-                ", id_proveedor=" + id_proveedor +
-                ", id_ingrediente=" + id_ingrediente +
-                ", precioUnitario=" + precioUnitario +
-                ", tiempoEntregaDias=" + tiempoEntregaDias +
+                "ID_ProveedorIngrediente=" + id_proveedorIngrediente +
+                ", ID_Proveedor=" + id_proveedor +
+                ", ID_Ingrediente=" + id_ingrediente +
+                ", PrecioUnitario=" + precioUnitario +
+                ", TiempoEntregaDias=" + tiempoEntregaDias +
                 '}';
     }
 }

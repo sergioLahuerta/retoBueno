@@ -69,13 +69,13 @@ public class Usuarios {
     @Override
     public String toString() {
         return "Usuarios{" +
-                "id_usuario=" + id_usuario +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", contrasena='" + contrasena + '\'' +
-                ", dni='" + dni + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
+                "ID_Usuario=" + id_usuario +
+                ", Nombre='" + nombre + '\'' +
+                ", Email='" + email + '\'' +
+                ", Contrasena='" + contrasena + '\'' +
+                ", DNI='" + dni + '\'' +
+                ", Telefono='" + telefono + '\'' +
+                ", Direccion='" + direccion + '\'' +
                 '}';
     }
 }

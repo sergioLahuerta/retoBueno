@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoriasDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM categorias WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Categorias WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public CategoriasDao() {
@@ -17,7 +17,7 @@ public class CategoriasDao implements iDao {
     @Override
     public int add(Object bean) {
         Categorias categoria = (Categorias) bean;
-        String sql = "INSERT INTO categorias (nombre) VALUES ('" + categoria.getNombre() + "')";
+        String sql = "INSERT INTO Categorias (Nombre) VALUES ('" + categoria.getNombre() + "')";
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -25,7 +25,7 @@ public class CategoriasDao implements iDao {
     @Override
     public int delete(Object e) {
         Categorias categoria = (Categorias) e;
-        String sql = "DELETE FROM categorias WHERE id_categoria = " + categoria.getId_categoria();
+        String sql = "DELETE FROM Categorias WHERE ID_Categoria = " + categoria.getId_categoria();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -33,7 +33,7 @@ public class CategoriasDao implements iDao {
     @Override
     public int update(Object bean) {
         Categorias categoria = (Categorias) bean;
-        String sql = "UPDATE categorias SET nombre = '" + categoria.getNombre() + "' WHERE id_categoria = " + categoria.getId_categoria();
+        String sql = "UPDATE Categorias SET Nombre = '" + categoria.getNombre() + "' WHERE ID_Categoria = " + categoria.getId_categoria();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -50,10 +50,10 @@ public class CategoriasDao implements iDao {
                 Categorias categoria = (Categorias) bean;
 
                 if (categoria.getId_categoria() > 0) {
-                    sql += " AND id_categoria = " + categoria.getId_categoria();
+                    sql += " AND ID_Categoria = " + categoria.getId_categoria();
                 }
                 if (categoria.getNombre() != null && !categoria.getNombre().isEmpty()) {
-                    sql += " AND nombre = '" + categoria.getNombre() + "'";
+                    sql += " AND Nombre = '" + categoria.getNombre() + "'";
                 }
             }
 
@@ -62,8 +62,8 @@ public class CategoriasDao implements iDao {
             if (rs != null) {
                 while (rs.next()) {
                     Categorias categoriaBd = new Categorias();
-                    categoriaBd.setId_categoria(rs.getInt("id_categoria"));
-                    categoriaBd.setNombre(rs.getString("nombre"));
+                    categoriaBd.setId_categoria(rs.getInt("ID_Categoria"));
+                    categoriaBd.setNombre(rs.getString("Nombre"));
 
                     categorias.add(categoriaBd);
                 }

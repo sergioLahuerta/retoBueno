@@ -53,8 +53,8 @@ public class Pagos {
     @Override
     public String toString() {
         return "Pagos{" +
-                "id_pago=" + id_pago +
-                ", id_factura=" + id_factura +
+                "ID_Pago=" + id_pago +
+                ", ID_Factura=" + id_factura +
                 ", metodoPago='" + metodoPago + '\'' +
                 ", fechaPago=" + fechaPago +
                 ", estadoPago='" + estadoPago + '\'' +

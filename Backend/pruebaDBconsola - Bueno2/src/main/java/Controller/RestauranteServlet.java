@@ -30,10 +30,10 @@ public class RestauranteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.setHeader("Access-Control-Allow-Origin", "*"); // Permite solicitudes desde cualquier dominio
+        resp.setHeader("Access-Control-Allow-Origin", "*");
 
-        String nombre = req.getParameter("nombre");
-        String direccion = req.getParameter("direccion");
+        String nombre = req.getParameter("Nombre");
+        String direccion = req.getParameter("Direccion");
 
         Restaurante filtro = new Restaurante();
         if (nombre != null && !nombre.trim().isEmpty()) filtro.setNombre(nombre);

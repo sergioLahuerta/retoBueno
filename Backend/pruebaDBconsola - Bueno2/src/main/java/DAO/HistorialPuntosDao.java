@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class HistorialPuntosDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM historial_puntos WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Historial_Puntos WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public HistorialPuntosDao() {
@@ -17,7 +17,7 @@ public class HistorialPuntosDao implements iDao {
     @Override
     public int add(Object bean) {
         HistorialPuntos h = (HistorialPuntos) bean;
-        String sql = "INSERT INTO historial_puntos (id_factura, fecha, puntos, tipoMovimiento, descripcion) VALUES (" +
+        String sql = "INSERT INTO Historial_Puntos (ID_Factura, Fecha, Puntos, TipoMovimiento, Descripcion) VALUES (" +
                 h.getId_factura() + ", '" +
                 new Date(h.getFecha().getTime()) + "', " +
                 h.getPuntos() + ", '" +
@@ -30,7 +30,7 @@ public class HistorialPuntosDao implements iDao {
     @Override
     public int delete(Object bean) {
         HistorialPuntos h = (HistorialPuntos) bean;
-        String sql = "DELETE FROM historial_puntos WHERE id_historialPuntos = " + h.getId_historialPuntos();
+        String sql = "DELETE FROM Historial_Puntos WHERE ID_HistorialPuntos = " + h.getId_historialPuntos();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -38,13 +38,13 @@ public class HistorialPuntosDao implements iDao {
     @Override
     public int update(Object bean) {
         HistorialPuntos h = (HistorialPuntos) bean;
-        String sql = "UPDATE historial_puntos SET " +
-                "id_factura = " + h.getId_factura() + ", " +
-                "fecha = '" + new Date(h.getFecha().getTime()) + "', " +
-                "puntos = " + h.getPuntos() + ", " +
-                "tipoMovimiento = '" + h.getTipoMovimiento() + "', " +
-                "descripcion = '" + h.getDescripcion() + "' " +
-                "WHERE id_historialPuntos = " + h.getId_historialPuntos();
+        String sql = "UPDATE Historial_Puntos SET " +
+                "ID_Factura = " + h.getId_factura() + ", " +
+                "Fecha = '" + new Date(h.getFecha().getTime()) + "', " +
+                "Puntos = " + h.getPuntos() + ", " +
+                "TipoMovimiento = '" + h.getTipoMovimiento() + "', " +
+                "Descripcion = '" + h.getDescripcion() + "' " +
+                "WHERE ID_HistorialPuntos = " + h.getId_historialPuntos();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -59,35 +59,35 @@ public class HistorialPuntosDao implements iDao {
             if (bean != null) {
                 HistorialPuntos h = (HistorialPuntos) bean;
                 if (h.getId_historialPuntos() > 0) {
-                    sql += " AND id_historialPuntos = " + h.getId_historialPuntos();
+                    sql += " AND ID_HistorialPuntos = " + h.getId_historialPuntos();
                 }
                 if (h.getId_factura() > 0) {
-                    sql += " AND id_factura = " + h.getId_factura();
+                    sql += " AND ID_Factura = " + h.getId_factura();
                 }
                 if (h.getFecha() != null) {
-                    sql += " AND fecha = '" + new Date(h.getFecha().getTime()) + "'";
+                    sql += " AND Fecha = '" + new Date(h.getFecha().getTime()) + "'";
                 }
                 if (h.getPuntos() > 0) {
-                    sql += " AND puntos = " + h.getPuntos();
+                    sql += " AND Puntos = " + h.getPuntos();
                 }
                 if (h.getTipoMovimiento() != null) {
-                    sql += " AND tipoMovimiento = '" + h.getTipoMovimiento() + "'";
+                    sql += " AND TipoMovimiento = '" + h.getTipoMovimiento() + "'";
                 }
             }
 
             ResultSet rs = motorSql.executeQuery(sql);
             while (rs != null && rs.next()) {
                 HistorialPuntos h = new HistorialPuntos();
-                h.setId_historialPuntos(rs.getInt("id_historialPuntos"));
-                h.setId_factura(rs.getInt("id_factura"));
-                h.setFecha(rs.getDate("fecha"));
-                h.setPuntos(rs.getInt("puntos"));
-                h.setTipoMovimiento(rs.getString("tipoMovimiento"));
-                h.setDescripcion(rs.getString("descripcion"));
+                h.setId_historialPuntos(rs.getInt("ID_HistorialPuntos"));
+                h.setId_factura(rs.getInt("ID_Factura"));
+                h.setFecha(rs.getDate("Fecha"));
+                h.setPuntos(rs.getInt("Puntos"));
+                h.setTipoMovimiento(rs.getString("TipoMovimiento"));
+                h.setDescripcion(rs.getString("Descripcion"));
                 lista.add(h);
             }
         } catch (SQLException e) {
-            System.out.println("Error en FindAll HistorialPuntos: " + e.getMessage());
+            System.out.println("Error en FindAll Historial_Puntos: " + e.getMessage());
         }
 
         return lista;

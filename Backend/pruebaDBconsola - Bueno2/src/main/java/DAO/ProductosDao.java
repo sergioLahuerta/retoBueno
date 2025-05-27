@@ -3,125 +3,96 @@ package DAO;
 import model.Productos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProductosDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM Productos WHERE 1=1 ";
-    private IMotorSql motorSql;
+public class ProductosDao {
 
-    public ProductosDao() {
-        motorSql = new MotorSql();
-    }
-
-    @Override
-    public int add(Object bean) {
-        Productos producto = (Productos) bean;
+    public int add(Productos producto, Connection conn) throws SQLException {
         String sql = "INSERT INTO Productos (ID_Oferta, ID_Categoria, Nombre, Descripcion, Precio) " +
-                "VALUES (" + producto.getId_oferta() + ", " +
-                producto.getId_categoria() + ", '" +
-                producto.getNombre() + "', '" +
-                producto.getDescripcion() + "', " +
-                producto.getPrecio() + ")";
-        motorSql.connect();
-        return motorSql.executeUpdate(sql);
+                "VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, producto.getId_oferta());
+            stmt.setInt(2, producto.getId_categoria());
+            stmt.setString(3, producto.getNombre());
+            stmt.setString(4, producto.getDescripcion());
+            stmt.setDouble(5, producto.getPrecio());
+            return stmt.executeUpdate();
+        }
     }
 
-    @Override
-    public int delete(Object e) {
-        Productos producto = (Productos) e;
-        String sql = "DELETE FROM Productos WHERE ID_Producto = " + producto.getId_producto();
-        motorSql.connect();
-        return motorSql.executeUpdate(sql);
+    public int delete(int idProducto, Connection conn) throws SQLException {
+        String sql = "DELETE FROM Productos WHERE ID_Producto = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idProducto);
+            return stmt.executeUpdate();
+        }
     }
 
-    @Override
-    public int update(Object bean) {
-        Productos producto = (Productos) bean;
-        String sql = "UPDATE Productos SET " +
-                "ID_Oferta = " + producto.getId_oferta() + ", " +
-                "ID_Categoria = " + producto.getId_categoria() + ", " +
-                "Nombre = '" + producto.getNombre() + "', " +
-                "Descripcion = '" + producto.getDescripcion() + "', " +
-                "Precio = " + producto.getPrecio() +
-                " WHERE ID_Producto = " + producto.getId_producto();
-        motorSql.connect();
-        return motorSql.executeUpdate(sql);
+    public int update(Productos producto, Connection conn) throws SQLException {
+        String sql = "UPDATE Productos SET ID_Oferta = ?, ID_Categoria = ?, Nombre = ?, Descripcion = ?, Precio = ? " +
+                "WHERE ID_Producto = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, producto.getId_oferta());
+            stmt.setInt(2, producto.getId_categoria());
+            stmt.setString(3, producto.getNombre());
+            stmt.setString(4, producto.getDescripcion());
+            stmt.setDouble(5, producto.getPrecio());
+            stmt.setInt(6, producto.getId_producto());
+            return stmt.executeUpdate();
+        }
     }
 
-    @Override
-    public ArrayList<Productos> FindAll(Object bean) {
+    public ArrayList<Productos>FindAll(Productos filtro, Connection conn) throws SQLException {
         ArrayList<Productos> productos = new ArrayList<>();
-        String sql = SQL_FIND;
+        StringBuilder sql = new StringBuilder("SELECT * FROM Productos WHERE 1=1");
 
-        try {
-            motorSql.connect();
+        if (filtro != null) {
+            if (filtro.getId_producto() > 0)
+                sql.append(" AND ID_Producto = ").append(filtro.getId_producto());
+            if (filtro.getId_categoria() > 0)
+                sql.append(" AND ID_Categoria = ").append(filtro.getId_categoria());
+            if (filtro.getId_oferta() > 0)
+                sql.append(" AND ID_Oferta = ").append(filtro.getId_oferta());
+            if (filtro.getNombre() != null && !filtro.getNombre().isEmpty())
+                sql.append(" AND Nombre = '").append(filtro.getNombre()).append("'");
+            if (filtro.getDescripcion() != null && !filtro.getDescripcion().isEmpty())
+                sql.append(" AND Descripcion = '").append(filtro.getDescripcion()).append("'");
+            if (filtro.getPrecio() > 0)
+                sql.append(" AND Precio = ").append(filtro.getPrecio());
+        }
 
-            if (bean != null) {
-                Productos producto = (Productos) bean;
+        try (PreparedStatement stmt = conn.prepareStatement(sql.toString());
+             ResultSet rs = stmt.executeQuery()) {
 
-                if (producto.getId_producto() > 0) {
-                    sql += " AND ID_Producto = " + producto.getId_producto();
-                }
-                if (producto.getId_categoria() > 0) {
-                    sql += " AND ID_Categoria = " + producto.getId_categoria();
-                }
-                if (producto.getId_oferta() > 0) {
-                    sql += " AND ID_Oferta = " + producto.getId_oferta();
-                }
-                if (producto.getNombre() != null && !producto.getNombre().isEmpty()) {
-                    sql += " AND Nombre = '" + producto.getNombre() + "'";
-                }
-                if (producto.getDescripcion() != null && !producto.getDescripcion().isEmpty()) {
-                    sql += " AND Descripcion = '" + producto.getDescripcion() + "'";
-                }
-                if (producto.getPrecio() > 0) {
-                    sql += " AND Precio = " + producto.getPrecio();
-                }
+            while (rs.next()) {
+                Productos p = new Productos();
+                p.setId_producto(rs.getInt("ID_Producto"));
+                p.setId_oferta(rs.getInt("ID_Oferta"));
+                p.setId_categoria(rs.getInt("ID_Categoria"));
+                p.setNombre(rs.getString("Nombre"));
+                p.setDescripcion(rs.getString("Descripcion"));
+                p.setPrecio(rs.getDouble("Precio"));
+                productos.add(p);
             }
-
-            ResultSet rs = motorSql.executeQuery(sql);
-
-            if (rs != null) {
-                while (rs.next()) {
-                    Productos productoBd = new Productos();
-                    productoBd.setId_producto(rs.getInt("ID_Producto"));
-                    productoBd.setId_oferta(rs.getInt("ID_Oferta"));
-                    productoBd.setId_categoria(rs.getInt("ID_Categoria"));
-                    productoBd.setNombre(rs.getString("Nombre"));
-                    productoBd.setDescripcion(rs.getString("Descripcion"));
-                    productoBd.setPrecio(rs.getDouble("Precio"));
-
-                    productos.add(productoBd);
-                }
-            } else {
-                System.out.println("La consulta no devolvió resultados.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al ejecutar la consulta o procesar el ResultSet: " + e.getMessage());
-            e.printStackTrace();
         }
 
         return productos;
     }
 
-    public double obtenerPrecioProducto(int idProducto, Connection conn) {
-        double precio = 0.0;
-        String sql = "SELECT precio FROM Productos WHERE ID_Producto = " + idProducto;
-
-        try {
-            motorSql.connect();
-            ResultSet rs = motorSql.executeQuery(sql);
-            if (rs != null && rs.next()) {
-                precio = rs.getDouble("Precio");
+    public static double obtenerPrecioProducto(int idProducto, Connection conn) throws SQLException {
+        String sql = "SELECT Precio FROM Productos WHERE ID_Producto = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idProducto);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("Precio");
             } else {
-                System.out.println("Producto no encontrado: ID = " + idProducto);
+                System.out.println("Producto no encontrado en BD con ID: " + idProducto);
+                return -1;
             }
-        } catch (SQLException e) {
-            System.out.println("Error al obtener precio del producto ID " + idProducto + ": " + e.getMessage());
         }
-
-        return precio;
     }
 }

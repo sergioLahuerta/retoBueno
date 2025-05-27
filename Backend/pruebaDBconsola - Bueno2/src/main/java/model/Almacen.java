@@ -42,10 +42,10 @@ public class Almacen {
     @Override
     public String toString() {
         return "Almacen{" +
-                "id_almacen=" + id_almacen +
-                ", nombre='" + nombre + '\'' +
-                ", capacidad=" + capacidad +
-                ", ubicacion='" + ubicacion + '\'' +
+                "ID_Almacen=" + id_almacen +
+                ", Nombre='" + nombre + '\'' +
+                ", Capacidad=" + capacidad +
+                ", Ubicacion='" + ubicacion + '\'' +
                 '}';
     }
 }

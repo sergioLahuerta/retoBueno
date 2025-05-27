@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DetallesFacturasDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM detalles_facturas WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Detalles_Facturas WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public DetallesFacturasDao() {
@@ -18,11 +18,11 @@ public class DetallesFacturasDao implements iDao {
     public int add(Object bean) {
         DetallesFacturas df = (DetallesFacturas) bean;
 
-        String sql = "INSERT INTO detalles_facturas (id_detalle_pedido, id_factura, precioUnitario, totalLinea, descuento) VALUES (" +
+        String sql = "INSERT INTO Detalles_Facturas (ID_Detalle_Pedido, ID_Factura, PrecioUnitario, TasaLocal, Descuento) VALUES (" +
                 df.getId_detalle_pedido() + ", " +
                 df.getId_factura() + ", " +
                 df.getPrecioUnitario() + ", " +
-                df.getTotalLinea() + ", " +
+                df.getTasaLocal() + ", " +
                 df.getDescuento() + ")";
 
         motorSql.connect();
@@ -32,7 +32,7 @@ public class DetallesFacturasDao implements iDao {
     @Override
     public int delete(Object e) {
         DetallesFacturas df = (DetallesFacturas) e;
-        String sql = "DELETE FROM detalles_facturas WHERE id_detalleFactura = " + df.getId_detalleFactura();
+        String sql = "DELETE FROM Detalles_Facturas WHERE ID_DetalleFactura = " + df.getId_detalleFactura();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -41,13 +41,13 @@ public class DetallesFacturasDao implements iDao {
     public int update(Object bean) {
         DetallesFacturas df = (DetallesFacturas) bean;
 
-        String sql = "UPDATE detalles_facturas SET " +
-                "id_detalle_pedido = " + df.getId_detalle_pedido() + ", " +
-                "id_factura = " + df.getId_factura() + ", " +
-                "precioUnitario = " + df.getPrecioUnitario() + ", " +
-                "totalLinea = " + df.getTotalLinea() + ", " +
-                "descuento = " + df.getDescuento() +
-                " WHERE id_detalleFactura = " + df.getId_detalleFactura();
+        String sql = "UPDATE Detalles_Facturas SET " +
+                "ID_Detalle_Pedido = " + df.getId_detalle_pedido() + ", " +
+                "ID_Factura = " + df.getId_factura() + ", " +
+                "PrecioUnitario = " + df.getPrecioUnitario() + ", " +
+                "TasaLocal = " + df.getTasaLocal() + ", " +
+                "Descuento = " + df.getDescuento() +
+                " WHERE ID_DetalleFactura = " + df.getId_detalleFactura();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -65,22 +65,22 @@ public class DetallesFacturasDao implements iDao {
                 DetallesFacturas df = (DetallesFacturas) bean;
 
                 if (df.getId_detalleFactura() > 0) {
-                    sql += " AND id_detalleFactura = " + df.getId_detalleFactura();
+                    sql += " AND ID_DetalleFactura = " + df.getId_detalleFactura();
                 }
                 if (df.getId_detalle_pedido() > 0) {
-                    sql += " AND id_detalle_pedido = " + df.getId_detalle_pedido();
+                    sql += " AND ID_Detalle_Pedido = " + df.getId_detalle_pedido();
                 }
                 if (df.getId_factura() > 0) {
-                    sql += " AND id_factura = " + df.getId_factura();
+                    sql += " AND ID_Factura = " + df.getId_factura();
                 }
                 if (df.getPrecioUnitario() > 0) {
-                    sql += " AND precioUnitario = " + df.getPrecioUnitario();
+                    sql += " AND PrecioUnitario = " + df.getPrecioUnitario();
                 }
-                if (df.getTotalLinea() > 0) {
-                    sql += " AND totalLinea = " + df.getTotalLinea();
+                if (df.getTasaLocal() > 0) {
+                    sql += " AND TasaLocal = " + df.getTasaLocal();
                 }
                 if (df.getDescuento() > 0) {
-                    sql += " AND descuento = " + df.getDescuento();
+                    sql += " AND Descuento = " + df.getDescuento();
                 }
             }
 
@@ -88,17 +88,17 @@ public class DetallesFacturasDao implements iDao {
 
             while (rs != null && rs.next()) {
                 DetallesFacturas df = new DetallesFacturas();
-                df.setId_detalleFactura(rs.getInt("id_detalleFactura"));
-                df.setId_detalle_pedido(rs.getInt("id_detalle_pedido"));
-                df.setId_factura(rs.getInt("id_factura"));
-                df.setPrecioUnitario(rs.getDouble("precioUnitario"));
-                df.setTotalLinea(rs.getDouble("totalLinea"));
-                df.setDescuento(rs.getDouble("descuento"));
+                df.setId_detalleFactura(rs.getInt("ID_DetalleFactura"));
+                df.setId_detalle_pedido(rs.getInt("ID_Detalle_Pedido"));
+                df.setId_factura(rs.getInt("ID_Factura"));
+                df.setPrecioUnitario(rs.getDouble("PrecioUnitario"));
+                df.setTasaLocal(rs.getDouble("TasaLocal"));
+                df.setDescuento(rs.getDouble("Descuento"));
 
                 lista.add(df);
             }
         } catch (SQLException e) {
-            System.out.println("Error en FindAll DetallesFacturas: " + e.getMessage());
+            System.out.println("Error en FindAll Detalles_Facturas: " + e.getMessage());
         }
 
         return lista;

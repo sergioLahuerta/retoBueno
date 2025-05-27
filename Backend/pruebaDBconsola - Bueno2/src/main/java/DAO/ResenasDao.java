@@ -23,7 +23,7 @@ public class ResenasDao implements iDao {
             sqlDate = new Date(resena.getFecha().getTime());
         }
 
-        String sql = "INSERT INTO resenas (id_usuario, id_restaurante, valoracion, fecha) VALUES (" +
+        String sql = "INSERT INTO resenas (ID_Usuario, ID_Restaurante, Valoracion, Fecha) VALUES (" +
                 resena.getId_usuario() + ", " +
                 resena.getId_restaurante() + ", " +
                 resena.getValoracion() + ", " +
@@ -36,7 +36,7 @@ public class ResenasDao implements iDao {
     @Override
     public int delete(Object e) {
         Resenas resena = (Resenas) e;
-        String sql = "DELETE FROM resenas WHERE id_resena = " + resena.getId_resena();
+        String sql = "DELETE FROM resenas WHERE ID_Resena = " + resena.getId_resena();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -50,11 +50,11 @@ public class ResenasDao implements iDao {
         }
 
         String sql = "UPDATE resenas SET " +
-                "id_usuario = " + resena.getId_usuario() + ", " +
-                "id_restaurante = " + resena.getId_restaurante() + ", " +
-                "valoracion = " + resena.getValoracion() + ", " +
-                "fecha = " + (sqlDate != null ? "'" + sqlDate + "'" : "NULL") + " " +
-                "WHERE id_resena = " + resena.getId_resena();
+                "ID_Usuario = " + resena.getId_usuario() + ", " +
+                "ID_Restaurante = " + resena.getId_restaurante() + ", " +
+                "Valoracion = " + resena.getValoracion() + ", " +
+                "Fecha = " + (sqlDate != null ? "'" + sqlDate + "'" : "NULL") + " " +
+                "WHERE ID_Resena = " + resena.getId_resena();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -72,19 +72,19 @@ public class ResenasDao implements iDao {
                 Resenas r = (Resenas) bean;
 
                 if (r.getId_resena() > 0) {
-                    sql += " AND id_resena = " + r.getId_resena();
+                    sql += " AND ID_Resena = " + r.getId_resena();
                 }
                 if (r.getId_usuario() > 0) {
-                    sql += " AND id_usuario = " + r.getId_usuario();
+                    sql += " AND ID_Usuario = " + r.getId_usuario();
                 }
                 if (r.getId_restaurante() > 0) {
-                    sql += " AND id_restaurante = " + r.getId_restaurante();
+                    sql += " AND ID_Restaurante = " + r.getId_restaurante();
                 }
                 if (r.getValoracion() >= 0) {
-                    sql += " AND valoracion = " + r.getValoracion();
+                    sql += " AND Valoracion = " + r.getValoracion();
                 }
                 if (r.getFecha() != null) {
-                    sql += " AND fecha = '" + new Date(r.getFecha().getTime()) + "'";
+                    sql += " AND Fecha = '" + new Date(r.getFecha().getTime()) + "'";
                 }
             }
 
@@ -92,11 +92,11 @@ public class ResenasDao implements iDao {
 
             while (rs.next()) {
                 Resenas resenaBd = new Resenas();
-                resenaBd.setId_resena(rs.getInt("id_resena"));
-                resenaBd.setId_usuario(rs.getInt("id_usuario"));
-                resenaBd.setId_restaurante(rs.getInt("id_restaurante"));
-                resenaBd.setValoracion(rs.getInt("valoracion"));
-                resenaBd.setFecha(rs.getDate("fecha"));
+                resenaBd.setId_resena(rs.getInt("ID_Resena"));
+                resenaBd.setId_usuario(rs.getInt("ID_Usuario"));
+                resenaBd.setId_restaurante(rs.getInt("ID_Restaurante"));
+                resenaBd.setValoracion(rs.getInt("Valoracion"));
+                resenaBd.setFecha(rs.getDate("Fecha"));
 
                 lista.add(resenaBd);
             }

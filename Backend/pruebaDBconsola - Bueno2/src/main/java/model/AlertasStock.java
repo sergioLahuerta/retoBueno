@@ -52,11 +52,11 @@ public class AlertasStock {
     @Override
     public String toString() {
         return "AlertaStock{" +
-                "idAlerta=" + idAlerta +
-                ", idIngrediente=" + idIngrediente +
-                ", fechaAlerta=" + fechaAlerta +
-                ", stockDisponible=" + stockDisponible +
-                ", mensaje='" + mensaje + '\'' +
+                "ID_Alerta=" + idAlerta +
+                ", ID_Ingrediente=" + idIngrediente +
+                ", FechaAlerta=" + fechaAlerta +
+                ", StockDisponible=" + stockDisponible +
+                ", Mensaje='" + mensaje + '\'' +
                 '}';
     }
 }

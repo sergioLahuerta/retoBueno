@@ -69,12 +69,12 @@ public class Restaurante {
     @Override
     public String toString() {
         return "Restaurante{" +
-                "id_restaurante=" + id_restaurante +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", email='" + email + '\'' +
-                ", aforo=" + aforo +
+                "ID_Restaurante=" + id_restaurante +
+                ", Nombre='" + nombre + '\'' +
+                ", Direccion='" + direccion + '\'' +
+                ", Telefono='" + telefono + '\'' +
+                ", Email='" + email + '\'' +
+                ", Aforo=" + aforo +
                 ", imagenRestaurante=" + imagenRestaurante +
                 '}';
     }

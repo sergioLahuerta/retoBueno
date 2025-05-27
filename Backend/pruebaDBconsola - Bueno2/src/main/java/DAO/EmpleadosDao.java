@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class EmpleadosDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM empleados WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Empleados WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public EmpleadosDao() {
@@ -19,7 +19,7 @@ public class EmpleadosDao implements iDao {
         Empleados empleado = (Empleados) bean;
         Date sqlDate = new Date(empleado.getFechaContratacion().getTime());
 
-        String sql = "INSERT INTO empleados (id_restaurante, nombre, apellidos, dni, telefono, sueldo, fechaContratacion) VALUES (" +
+        String sql = "INSERT INTO Empleados (ID_Restaurante, Nombre, Apellidos, DNI, Telefono, Sueldo, FechaContratacion) VALUES (" +
                 empleado.getId_restaurante() + ", '" +
                 empleado.getNombre() + "', '" +
                 empleado.getApellidos() + "', '" +
@@ -35,7 +35,7 @@ public class EmpleadosDao implements iDao {
     @Override
     public int delete(Object e) {
         Empleados empleado = (Empleados) e;
-        String sql = "DELETE FROM empleados WHERE id_empleado = " + empleado.getId_empleado();
+        String sql = "DELETE FROM Empleados WHERE ID_Empleado = " + empleado.getId_empleado();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -45,15 +45,15 @@ public class EmpleadosDao implements iDao {
         Empleados empleado = (Empleados) bean;
         Date sqlDate = new Date(empleado.getFechaContratacion().getTime());
 
-        String sql = "UPDATE empleados SET " +
-                "id_restaurante = " + empleado.getId_restaurante() + ", " +
-                "nombre = '" + empleado.getNombre() + "', " +
-                "apellidos = '" + empleado.getApellidos() + "', " +
-                "dni = '" + empleado.getDni() + "', " +
-                "telefono = '" + empleado.getTelefono() + "', " +
-                "sueldo = " + empleado.getSueldo() + ", " +
-                "fechaContratacion = '" + sqlDate + "' " +
-                "WHERE id_empleado = " + empleado.getId_empleado();
+        String sql = "UPDATE Empleados SET " +
+                "ID_Restaurante = " + empleado.getId_restaurante() + ", " +
+                "Nombre = '" + empleado.getNombre() + "', " +
+                "Apellidos = '" + empleado.getApellidos() + "', " +
+                "DNI = '" + empleado.getDni() + "', " +
+                "Telefono = '" + empleado.getTelefono() + "', " +
+                "Sueldo = " + empleado.getSueldo() + ", " +
+                "FechaContratacion = '" + sqlDate + "' " +
+                "WHERE ID_Empleado = " + empleado.getId_empleado();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -71,28 +71,28 @@ public class EmpleadosDao implements iDao {
                 Empleados e = (Empleados) bean;
 
                 if (e.getId_empleado() > 0) {
-                    sql += " AND id_empleado = " + e.getId_empleado();
+                    sql += " AND ID_Empleado = " + e.getId_empleado();
                 }
                 if (e.getId_restaurante() > 0) {
-                    sql += " AND id_restaurante = " + e.getId_restaurante();
+                    sql += " AND ID_Restaurante = " + e.getId_restaurante();
                 }
                 if (e.getNombre() != null && !e.getNombre().isEmpty()) {
-                    sql += " AND nombre = '" + e.getNombre() + "'";
+                    sql += " AND Nombre = '" + e.getNombre() + "'";
                 }
                 if (e.getApellidos() != null && !e.getApellidos().isEmpty()) {
-                    sql += " AND apellidos = '" + e.getApellidos() + "'";
+                    sql += " AND Apellidos = '" + e.getApellidos() + "'";
                 }
                 if (e.getDni() != null && !e.getDni().isEmpty()) {
-                    sql += " AND dni = '" + e.getDni() + "'";
+                    sql += " AND DNI = '" + e.getDni() + "'";
                 }
                 if (e.getTelefono() != null && !e.getTelefono().isEmpty()) {
-                    sql += " AND telefono = '" + e.getTelefono() + "'";
+                    sql += " AND Telefono = '" + e.getTelefono() + "'";
                 }
                 if (e.getSueldo() >= 0) {
-                    sql += " AND sueldo = " + e.getSueldo();
+                    sql += " AND Sueldo = " + e.getSueldo();
                 }
                 if (e.getFechaContratacion() != null) {
-                    sql += " AND fechaContratacion = '" + new Date(e.getFechaContratacion().getTime()) + "'";
+                    sql += " AND FechaContratacion = '" + new Date(e.getFechaContratacion().getTime()) + "'";
                 }
             }
 
@@ -100,14 +100,14 @@ public class EmpleadosDao implements iDao {
 
             while (rs.next()) {
                 Empleados empleado = new Empleados();
-                empleado.setId_empleado(rs.getInt("id_empleado"));
-                empleado.setId_restaurante(rs.getInt("id_restaurante"));
-                empleado.setNombre(rs.getString("nombre"));
+                empleado.setId_empleado(rs.getInt("ID_Empleado"));
+                empleado.setId_restaurante(rs.getInt("ID_Restaurante"));
+                empleado.setNombre(rs.getString("Nombre"));
                 empleado.setApellidos(rs.getString("apellidos"));
-                empleado.setDni(rs.getString("dni"));
-                empleado.setTelefono(rs.getString("telefono"));
-                empleado.setSueldo(rs.getDouble("sueldo"));
-                empleado.setFechaContratacion(rs.getDate("fechaContratacion"));
+                empleado.setDni(rs.getString("DNI"));
+                empleado.setTelefono(rs.getString("Telefono"));
+                empleado.setSueldo(rs.getDouble("Sueldo"));
+                empleado.setFechaContratacion(rs.getDate("FechaContratacion"));
 
                 lista.add(empleado);
             }

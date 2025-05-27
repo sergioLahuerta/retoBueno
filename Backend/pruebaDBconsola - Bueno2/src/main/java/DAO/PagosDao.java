@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PagosDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM pagos WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Pagos WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public PagosDao() {
@@ -18,7 +18,7 @@ public class PagosDao implements iDao {
     @Override
     public int add(Object bean) {
         Pagos p = (Pagos) bean;
-        String sql = "INSERT INTO pagos (id_factura, metodoPago, fechaPago, estadoPago) VALUES (" +
+        String sql = "INSERT INTO Pagos (ID_Factura, metodoPago, fechaPago, estadoPago) VALUES (" +
                 p.getId_factura() + ", '" +
                 p.getMetodoPago() + "', '" +
                 new Date(p.getFechaPago().getTime()) + "', '" +
@@ -30,7 +30,7 @@ public class PagosDao implements iDao {
     @Override
     public int delete(Object bean) {
         Pagos p = (Pagos) bean;
-        String sql = "DELETE FROM pagos WHERE id_pago = " + p.getId_pago();
+        String sql = "DELETE FROM Pagos WHERE ID_Pago = " + p.getId_pago();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -38,8 +38,8 @@ public class PagosDao implements iDao {
     @Override
     public int update(Object bean) {
         Pagos p = (Pagos) bean;
-        String sql = "UPDATE pagos SET " +
-                "id_factura = " + p.getId_factura() + ", " +
+        String sql = "UPDATE Pagos SET " +
+                "ID_Factura = " + p.getId_factura() + ", " +
                 "metodoPago = '" + p.getMetodoPago() + "', " +
                 "fechaPago = '" + new Date(p.getFechaPago().getTime()) + "', " +
                 "estadoPago = '" + p.getEstadoPago() + "' " +
@@ -58,10 +58,10 @@ public class PagosDao implements iDao {
             if (bean != null) {
                 Pagos p = (Pagos) bean;
                 if (p.getId_pago() > 0) {
-                    sql += " AND id_pago = " + p.getId_pago();
+                    sql += " AND ID_Pago = " + p.getId_pago();
                 }
                 if (p.getId_factura() > 0) {
-                    sql += " AND id_factura = " + p.getId_factura();
+                    sql += " AND ID_Factura = " + p.getId_factura();
                 }
                 if (p.getMetodoPago() != null) {
                     sql += " AND metodoPago = '" + p.getMetodoPago() + "'";
@@ -77,8 +77,8 @@ public class PagosDao implements iDao {
             ResultSet rs = motorSql.executeQuery(sql);
             while (rs != null && rs.next()) {
                 Pagos p = new Pagos();
-                p.setId_pago(rs.getInt("id_pago"));
-                p.setId_factura(rs.getInt("id_factura"));
+                p.setId_pago(rs.getInt("ID_Pago"));
+                p.setId_factura(rs.getInt("ID_Factura"));
                 p.setMetodoPago(rs.getString("metodoPago"));
                 p.setFechaPago(rs.getDate("fechaPago"));
                 p.setEstadoPago(rs.getString("estadoPago"));

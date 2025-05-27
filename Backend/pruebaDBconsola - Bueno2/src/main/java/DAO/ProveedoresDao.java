@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProveedoresDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM proveedores WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Proveedores WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public ProveedoresDao() {
@@ -18,7 +18,7 @@ public class ProveedoresDao implements iDao {
     public int add(Object bean) {
         Proveedores p = (Proveedores) bean;
 
-        String sql = "INSERT INTO proveedores (nombreEmpresa, Telefono, Email) VALUES ('" +
+        String sql = "INSERT INTO Proveedores (nombreEmpresa, Telefono, Email) VALUES ('" +
                 p.getNombreEmpresa() + "', '" +
                 p.getTelefono() + "', '" +
                 p.getEmail() + "')";
@@ -30,7 +30,7 @@ public class ProveedoresDao implements iDao {
     @Override
     public int delete(Object e) {
         Proveedores p = (Proveedores) e;
-        String sql = "DELETE FROM proveedores WHERE id_proveedor = " + p.getId_proveedor();
+        String sql = "DELETE FROM Proveedores WHERE ID_Proveedor = " + p.getId_proveedor();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -39,11 +39,11 @@ public class ProveedoresDao implements iDao {
     public int update(Object bean) {
         Proveedores p = (Proveedores) bean;
 
-        String sql = "UPDATE proveedores SET " +
+        String sql = "UPDATE Proveedores SET " +
                 "nombreEmpresa = '" + p.getNombreEmpresa() + "', " +
-                "telefono = '" + p.getTelefono() + "', " +
-                "email = '" + p.getEmail() + "' " +
-                "WHERE id_proveedor = " + p.getId_proveedor();
+                "Telefono = '" + p.getTelefono() + "', " +
+                "Email = '" + p.getEmail() + "' " +
+                "WHERE ID_Proveedor = " + p.getId_proveedor();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -61,16 +61,16 @@ public class ProveedoresDao implements iDao {
                 Proveedores p = (Proveedores) bean;
 
                 if (p.getId_proveedor() > 0) {
-                    sql += " AND id_proveedor = " + p.getId_proveedor();
+                    sql += " AND ID_Proveedor = " + p.getId_proveedor();
                 }
                 if (p.getNombreEmpresa() != null && !p.getNombreEmpresa().isEmpty()) {
                     sql += " AND nombreEmpresa = '" + p.getNombreEmpresa() + "'";
                 }
                 if (p.getTelefono() != null && !p.getTelefono().isEmpty()) {
-                    sql += " AND telefono = '" + p.getTelefono() + "'";
+                    sql += " AND Telefono = '" + p.getTelefono() + "'";
                 }
                 if (p.getEmail() != null && !p.getEmail().isEmpty()) {
-                    sql += " AND email = '" + p.getEmail() + "'";
+                    sql += " AND Email = '" + p.getEmail() + "'";
                 }
             }
 
@@ -78,10 +78,10 @@ public class ProveedoresDao implements iDao {
 
             while (rs.next()) {
                 Proveedores proveedor = new Proveedores();
-                proveedor.setId_proveedor(rs.getInt("id_proveedor"));
+                proveedor.setId_proveedor(rs.getInt("ID_Proveedor"));
                 proveedor.setNombreEmpresa(rs.getString("nombreEmpresa"));
-                proveedor.setTelefono(rs.getString("telefono"));
-                proveedor.setEmail(rs.getString("email"));
+                proveedor.setTelefono(rs.getString("Telefono"));
+                proveedor.setEmail(rs.getString("Email"));
 
                 lista.add(proveedor);
             }

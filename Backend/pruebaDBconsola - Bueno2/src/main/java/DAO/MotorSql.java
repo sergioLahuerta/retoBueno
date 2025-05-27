@@ -13,27 +13,32 @@ public class MotorSql implements IMotorSql {
     private ResultSet m_Resulset;
 
     @Override
-    public void connect() {
+    public Connection connect() {
         try {
             Class.forName(DRIVER_NAME);
             m_Connection = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASS);
-            m_Statement = m_Connection.createStatement();
+            m_Statement = m_Connection.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY
+            );
             System.out.println("Conexión exitosa a la base de datos.");
         } catch (ClassNotFoundException e) {
             System.out.println("Error al cargar el driver: " + e.getMessage());
             throw new RuntimeException(e);
         } catch (SQLException sqlEx) {
             System.out.println("Error en la conexión: " + sqlEx.getMessage());
-            throw new RuntimeException(sqlEx);  // lanzar excepción para detener ejecución si no conecta
+            throw new RuntimeException(sqlEx);
         }
+        return m_Connection;
     }
+
 
 
     @Override
     public int execute(String sql) {
         int filasAfectadas = 0;
         try {
-            // Ejecutar una consulta de tipo INSERT, UPDATE o DELETE
+            //Ejecutar una consulta de tipo INSERT, UPDATE o DELETE
             filasAfectadas = m_Statement.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println("Error al ejecutar el SQL: " + ex.getMessage());
@@ -49,12 +54,12 @@ public class MotorSql implements IMotorSql {
         }
 
         try {
-            // Ejecutar la consulta SELECT
+            //Ejecutar la consulta SELECT
             m_Resulset = m_Statement.executeQuery(sql);
         } catch (SQLException ex) {
             System.out.println("Error al ejecutar la consulta: " + ex.getMessage());
-            ex.printStackTrace(); // Esto es para ver el stack trace de la excepción
-            return null; // Si ocurre un error, devolvemos null
+            ex.printStackTrace();
+            return null; //En caso de error, devuelve null.
         }
         return m_Resulset;
     }

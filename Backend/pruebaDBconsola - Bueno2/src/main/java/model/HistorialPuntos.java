@@ -61,13 +61,13 @@ public class HistorialPuntos {
 
     @Override
     public String toString() {
-        return "HistorialPuntos{" +
-                "id_historialPuntos=" + id_historialPuntos +
-                ", id_factura=" + id_factura +
-                ", fecha=" + fecha +
-                ", puntos=" + puntos +
-                ", tipoMovimiento='" + tipoMovimiento + '\'' +
-                ", descripcion='" + descripcion + '\'' +
+        return "Historial_Puntos{" +
+                "ID_HistorialPuntos=" + id_historialPuntos +
+                ", ID_Factura=" + id_factura +
+                ", Fecha=" + fecha +
+                ", Puntos=" + puntos +
+                ", TipoMovimiento='" + tipoMovimiento + '\'' +
+                ", Descripcion='" + descripcion + '\'' +
                 '}';
     }
 }

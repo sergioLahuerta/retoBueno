@@ -35,9 +35,9 @@ public class Facturas {
     @Override
     public String toString() {
         return "Facturas{" +
-                "id_factura=" + id_factura +
-                ", fechaFactura=" + fechaFactura +
-                ", importeTotal=" + importeTotal +
+                "ID_Factura=" + id_factura +
+                ", FechaFactura=" + fechaFactura +
+                ", ImporteTotal=" + importeTotal +
                 '}';
     }
 }

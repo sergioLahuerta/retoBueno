@@ -5,7 +5,6 @@ public class DetallesPedidos {
     private int id_pedido;
     private int id_producto;
     private int cantidad;
-    private double precioUnidad;
     private String observaciones;
 
     // Getters y Setters
@@ -45,27 +44,18 @@ public class DetallesPedidos {
         return observaciones;
     }
 
-    public double getPrecioUnidad() {
-        return precioUnidad;
-    }
-
-    public void setPrecioUnidad(double precioUnidad) {
-        this.precioUnidad = precioUnidad;
-    }
-
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
 
     @Override
     public String toString() {
-        return "DetallesPedidos{" +
-                "id_detallePedido=" + id_detallePedido +
-                ", id_pedido=" + id_pedido +
-                ", id_producto=" + id_producto +
-                ", cantidad=" + cantidad +
-                ", precioUnidad=" + precioUnidad +
-                ", observaciones='" + observaciones + '\'' +
+        return "Detalles_Pedidos{" +
+                "ID_DetallePedido=" + id_detallePedido +
+                ", ID_Pedido=" + id_pedido +
+                ", ID_Producto=" + id_producto +
+                ", Cantidad=" + cantidad +
+                ", Observaciones='" + observaciones + '\'' +
                 '}';
     }
 }

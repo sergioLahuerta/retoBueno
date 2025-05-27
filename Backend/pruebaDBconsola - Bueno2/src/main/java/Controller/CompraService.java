@@ -10,55 +10,105 @@ import model.DetallesPedidos;
 import model.Facturas;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.util.List;
 
 public class CompraService {
-    private PedidosDao pedidosDao = new PedidosDao();
-    private DetallesPedidosDao detallesDao = new DetallesPedidosDao();
-    private FacturasDao facturasDao = new FacturasDao();
-    private ProductosDao productosDao = new ProductosDao();
-
-    public void procesarCompra(Carrito carrito, int idUsuario, int idRestaurante, Connection conn) throws Exception {
+    public static void procesarCompra(Carrito carrito, int id_usuario, int idRestaurante, Connection conn) {
         try {
+            conn.setAutoCommit(false);
+
             double total = 0;
 
-            // Paso 1: Calcular precios de productos
             for (DetallesPedidos item : carrito.getItems()) {
-                double precio = productosDao.obtenerPrecioProducto(item.getId_producto(), conn);
-                item.setPrecioUnidad(precio);
+                double precio = ProductosDao.obtenerPrecioProducto(item.getId_producto(), conn);
+                if (precio < 0) {
+                    throw new RuntimeException("Precio inválido para producto ID: " + item.getId_producto());
+                }
                 total += item.getCantidad() * precio;
+                System.out.println("Precio producto " + item.getId_producto() + ": " + precio);
             }
 
-            // Paso 2: Crear factura
             Facturas factura = new Facturas();
             factura.setFechaFactura(new java.util.Date());
             factura.setImporteTotal(total);
-            int idFactura = facturasDao.add(factura, conn);
-            System.out.println("Factura creada con ID: " + idFactura + " y total: " + total);
+            System.out.println("[DEBUG] Intentando crear factura...");
+            int id_factura = FacturasDao.add(factura, conn);
+            System.out.println("[DEBUG] Resultado ID factura: " + id_factura);
+            if (id_factura < 0) {
+                throw new RuntimeException("No se pudo crear factura");
+            }
 
-            // Paso 3: Crear pedido
             Pedidos pedido = new Pedidos();
-            pedido.setId_factura(idFactura);
-            pedido.setId_usuario(idUsuario);
+            pedido.setId_factura(id_factura);
+            pedido.setId_usuario(id_usuario);
             pedido.setId_restaurante(idRestaurante);
-            pedido.setNumero(generarNumeroPedido()); // Si implementas esta lógica
-            int idPedido = pedidosDao.add(pedido, conn);
+            pedido.setNumero(generarNumeroPedido());
+            int idPedido = PedidosDao.add(pedido, conn);
+            if (idPedido < 0) {
+                throw new RuntimeException("No se pudo crear pedido");
+            }
             System.out.println("Pedido creado con ID: " + idPedido);
 
-            // Paso 4: Insertar detalles del pedido
             for (DetallesPedidos item : carrito.getItems()) {
                 item.setId_pedido(idPedido);
-                detallesDao.add(item, conn);
+                int res = DetallesPedidosDao.add(item, conn);
+                if (res <= 0) {
+                    throw new RuntimeException("Error al insertar detalle para producto " + item.getId_producto());
+                }
                 System.out.println("Detalle añadido: Producto " + item.getId_producto() + ", Cantidad " + item.getCantidad());
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException("Error al procesar la compra", e);
+            conn.commit();
+
+        } catch (java.sql.SQLException sqlEx) {
+            try {
+                conn.rollback();
+                System.err.println("Rollback ejecutado tras error SQL");
+            } catch (Exception rollbackEx) {
+                System.err.println("Error haciendo rollback: " + rollbackEx.getMessage());
+            }
+            System.err.println("Error SQL en procesarCompra: " + sqlEx.getMessage());
+            sqlEx.printStackTrace();
+            throw new RuntimeException("Error SQL al procesar la compra: " + sqlEx.getMessage(), sqlEx);
+
+        } catch (RuntimeException rte) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                    System.err.println("Rollback ejecutado tras error Runtime");
+                }
+            } catch (Exception rollbackEx) {
+                System.err.println("Error haciendo rollback: " + rollbackEx.getMessage());
+            }
+            System.err.println("Error Runtime en procesarCompra: " + rte.getMessage());
+            rte.printStackTrace();
+            throw rte;
+
+        } catch (Exception ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                    System.err.println("Rollback ejecutado tras error inesperado");
+                }
+            } catch (Exception rollbackEx) {
+                System.err.println("Error haciendo rollback: " + rollbackEx.getMessage());
+            }
+            System.err.println("Error inesperado en procesarCompra: " + ex.getMessage());
+            ex.printStackTrace();
+            throw new RuntimeException("Error inesperado al procesar la compra: " + ex.getMessage(), ex);
+
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                }
+            } catch (Exception ex) {
+                System.err.println("Error restaurando autocommit: " + ex.getMessage());
+            }
         }
     }
 
-    private int generarNumeroPedido() {
-        return (int) (Math.random() * 1000000); // puedes cambiarlo por una lógica más sólida si quieres
+
+    private static int generarNumeroPedido() {
+        return (int) (Math.random() * 1000000);
     }
 }

@@ -21,15 +21,15 @@ public class RegistroUsuarioServlet extends HttpServlet {
             return;
         }
 
-        String nombre = request.getParameter("nombre");
-        String sexo = request.getParameter("sexo");
-        String dni = request.getParameter("dni");
-        String telefono = request.getParameter("telefono");
-        String direccion = request.getParameter("direccion");
+        String nombre = request.getParameter("Nombre");
+        String sexo = request.getParameter("Sexo");
+        String dni = request.getParameter("DNI");
+        String telefono = request.getParameter("Telefono");
+        String direccion = request.getParameter("Direccion");
 
         Usuarios usuario = new Usuarios();
         usuario.setEmail(email);
-        usuario.setContrasena(contrasena); // Puedes mejorar luego hasheando
+        usuario.setContrasena(contrasena);
 
         if (nombre != null && !nombre.isEmpty()) usuario.setNombre(nombre);
         if (dni != null && !dni.isEmpty()) usuario.setDni(dni);
@@ -47,7 +47,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
                 response.sendRedirect("registro_error.html");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Aquí verás el error detallado en la consola
+            e.printStackTrace(); //Ayuda para depurar posibles errores
             response.sendRedirect("registro_error.html");
         }
     }

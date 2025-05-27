@@ -33,9 +33,9 @@ public class Puntos {
     @Override
     public String toString() {
         return "Puntos{" +
-                "id_puntos=" + id_puntos +
-                ", id_usuario=" + id_usuario +
-                ", puntosActuales=" + puntosActuales +
+                "ID_Puntos=" + id_puntos +
+                ", ID_Usuario=" + id_usuario +
+                ", PuntosActuales=" + puntosActuales +
                 '}';
     }
 }

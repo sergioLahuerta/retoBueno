@@ -42,11 +42,11 @@ public class RestauranteDao implements iDao {
         Restaurante restaurante = (Restaurante) bean;
 
         String sql = "UPDATE Restaurante SET " +
-                "nombre = '" + restaurante.getNombre() + "', " +
-                "direccion = '" + restaurante.getDireccion() + "', " +
-                "telefono = '" + restaurante.getTelefono() + "', " +
-                "email = '" + restaurante.getEmail() + "', " +
-                "aforo = " + restaurante.getAforo() + ", " +
+                "Nombre = '" + restaurante.getNombre() + "', " +
+                "Direccion = '" + restaurante.getDireccion() + "', " +
+                "Telefono = '" + restaurante.getTelefono() + "', " +
+                "Email = '" + restaurante.getEmail() + "', " +
+                "Aforo = " + restaurante.getAforo() + ", " +
                 "imagenRestaurante = '" + restaurante.getImagenRestaurante() + "' " +
                 "WHERE ID_Restaurante = " + restaurante.getId_restaurante();
 
@@ -77,7 +77,7 @@ public class RestauranteDao implements iDao {
             if (rs != null) {
                 while (rs.next()) {
                     Restaurante r = new Restaurante();
-                    r.setId_restaurante(rs.getInt("ID_Restaurante"));  // <-- corregido aquí
+                    r.setId_restaurante(rs.getInt("ID_Restaurante"));
                     r.setNombre(rs.getString("Nombre"));
                     r.setDireccion(rs.getString("Direccion"));
                     r.setTelefono(rs.getString("Telefono"));

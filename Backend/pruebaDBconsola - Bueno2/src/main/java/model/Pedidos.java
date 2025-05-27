@@ -51,11 +51,11 @@ public class Pedidos {
     @Override
     public String toString() {
         return "Pedidos{" +
-                "id_pedido=" + id_pedido +
-                ", id_factura=" + id_factura +
-                ", id_restaurante=" + id_restaurante +
-                ", id_usuario=" + id_usuario +
-                ", numero=" + numero +
+                "ID_Pedido=" + id_pedido +
+                ", ID_Factura=" + id_factura +
+                ", ID_Restaurante=" + id_restaurante +
+                ", ID_Usuario=" + id_usuario +
+                ", Numero=" + numero +
                 '}';
     }
 }

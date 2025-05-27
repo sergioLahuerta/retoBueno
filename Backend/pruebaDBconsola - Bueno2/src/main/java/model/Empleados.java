@@ -81,14 +81,14 @@ public class Empleados implements IModel{
     @Override
     public String toString() {
         return "Empleados{" +
-                "id_empleado=" + id_empleado +
-                ", id_restaurante=" + id_restaurante +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", dni='" + dni + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", sueldo=" + sueldo +
-                ", fechaContratacion=" + fechaContratacion +
+                "ID_Empleado=" + id_empleado +
+                ", ID_Restaurante=" + id_restaurante +
+                ", Nombre='" + nombre + '\'' +
+                ", Apellidos='" + apellidos + '\'' +
+                ", DNI='" + dni + '\'' +
+                ", Telefono='" + telefono + '\'' +
+                ", Sueldo=" + sueldo +
+                ", FechaContratacion=" + fechaContratacion +
                 '}';
     }
 

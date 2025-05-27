@@ -61,10 +61,10 @@ public class Ofertas {
     @Override
     public String toString() {
         return "Ofertas{" +
-                "id_oferta=" + id_oferta +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", descripcion='" + descripcion + '\'' +
+                "ID_Oferta=" + id_oferta +
+                ", Nombre='" + nombre + '\'' +
+                ", Precio=" + precio +
+                ", Descripcion='" + descripcion + '\'' +
                 ", columnaImagen='" + columnaImagen + '\'' +
                 ", fechaExpiracion=" + fechaExpiracion +
                 '}';

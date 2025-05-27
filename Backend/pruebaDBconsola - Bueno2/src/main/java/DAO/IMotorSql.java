@@ -1,10 +1,10 @@
 package DAO;
 
-import java.sql.Date;
+import java.sql.Connection;
 import java.sql.ResultSet;
 
 public interface IMotorSql {
-    public void connect();
+    public Connection connect();
 
     public int execute(String sql);
 
@@ -13,4 +13,5 @@ public interface IMotorSql {
     public void disconnected();
 
     int executeUpdate(String sql);
+
 }

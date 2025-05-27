@@ -167,7 +167,7 @@ CREATE TABLE Detalles_Facturas (
     ID_Detalle_Pedido INT NOT NULL,
     ID_Factura INT NOT NULL,
     PrecioUnitario DECIMAL(10,2) NOT NULL,
-    TotalLinea DECIMAL(10,2),
+    TasaLocal DECIMAL(10,2),
     Descuento DECIMAL(10,2),
     FOREIGN KEY (ID_Detalle_Pedido) REFERENCES Detalles_Pedidos(ID_DetallePedido),
     FOREIGN KEY (ID_Factura) REFERENCES Facturas(ID_Factura)

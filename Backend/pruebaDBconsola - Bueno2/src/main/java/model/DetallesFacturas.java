@@ -5,7 +5,7 @@ public class DetallesFacturas {
     private int id_detalle_pedido;
     private int id_factura;
     private double precioUnitario;
-    private double totalLinea;
+    private double tasaLocal;
     private double descuento;
 
     // Getters y Setters
@@ -41,12 +41,12 @@ public class DetallesFacturas {
         this.precioUnitario = precioUnitario;
     }
 
-    public double getTotalLinea() {
-        return totalLinea;
+    public double getTasaLocal() {
+        return tasaLocal;
     }
 
-    public void setTotalLinea(double totalLinea) {
-        this.totalLinea = totalLinea;
+    public void setTasaLocal(double tasaLocal) {
+        this.tasaLocal = tasaLocal;
     }
 
     public double getDescuento() {
@@ -59,13 +59,13 @@ public class DetallesFacturas {
 
     @Override
     public String toString() {
-        return "DetallesFacturas{" +
-                "id_detalleFactura=" + id_detalleFactura +
-                ", id_detalle_pedido=" + id_detalle_pedido +
-                ", id_factura=" + id_factura +
-                ", precioUnitario=" + precioUnitario +
-                ", totalLinea=" + totalLinea +
-                ", descuento=" + descuento +
+        return "Detalles_Facturas{" +
+                "ID_DetalleFactura=" + id_detalleFactura +
+                ", ID_Detalle_pedido=" + id_detalle_pedido +
+                ", ID_Factura=" + id_factura +
+                ", PrecioUnitario=" + precioUnitario +
+                ", TasaLocal=" + tasaLocal +
+                ", Descuento=" + descuento +
                 '}';
     }
 }

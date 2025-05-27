@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuariosDao implements iDao {
-    private final String SQL_FIND = "SELECT * FROM usuarios WHERE 1=1 ";
+    private final String SQL_FIND = "SELECT * FROM Usuarios WHERE 1=1 ";
     private IMotorSql motorSql;
 
     public UsuariosDao() {
@@ -18,7 +18,7 @@ public class UsuariosDao implements iDao {
     public int add(Object bean) {
         Usuarios usuario = (Usuarios) bean;
 
-        String sql = "INSERT INTO usuarios (nombre, email, contrasena, dni, telefono, direccion) VALUES ('" +
+        String sql = "INSERT INTO usuarios (Nombre, Email, Contrasena, DNI, Telefono, Direccion) VALUES ('" +
                 usuario.getNombre() + "', '" +
                 usuario.getEmail() + "', '" +
                 usuario.getContrasena() + "', '" +
@@ -33,7 +33,7 @@ public class UsuariosDao implements iDao {
     @Override
     public int delete(Object e) {
         Usuarios usuario = (Usuarios) e;
-        String sql = "DELETE FROM usuarios WHERE id_usuario = " + usuario.getId_usuario();
+        String sql = "DELETE FROM Usuarios WHERE ID_Usuario = " + usuario.getId_usuario();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -43,13 +43,13 @@ public class UsuariosDao implements iDao {
         Usuarios usuario = (Usuarios) bean;
 
         String sql = "UPDATE usuarios SET " +
-                "nombre = '" + usuario.getNombre() + "', " +
-                "email = '" + usuario.getEmail() + "', " +
-                "contrasena = '" + usuario.getContrasena() + "', " +
-                "dni = '" + usuario.getDni() + "', " +
-                "telefono = '" + usuario.getTelefono() + "', " +
-                "direccion = '" + usuario.getDireccion() + "' " +
-                "WHERE id_usuario = " + usuario.getId_usuario();
+                "Nombre = '" + usuario.getNombre() + "', " +
+                "Email = '" + usuario.getEmail() + "', " +
+                "Contrasena = '" + usuario.getContrasena() + "', " +
+                "DNI = '" + usuario.getDni() + "', " +
+                "Telefono = '" + usuario.getTelefono() + "', " +
+                "Direccion = '" + usuario.getDireccion() + "' " +
+                "WHERE ID_Usuario = " + usuario.getId_usuario();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -67,25 +67,25 @@ public class UsuariosDao implements iDao {
                 Usuarios u = (Usuarios) bean;
 
                 if (u.getId_usuario() > 0) {
-                    sql += " AND id_usuario = " + u.getId_usuario();
+                    sql += " AND ID_Usuario = " + u.getId_usuario();
                 }
                 if (u.getNombre() != null && !u.getNombre().isEmpty()) {
-                    sql += " AND nombre = '" + u.getNombre() + "'";
+                    sql += " AND Nombre = '" + u.getNombre() + "'";
                 }
                 if (u.getEmail() != null && !u.getEmail().isEmpty()) {
-                    sql += " AND email = '" + u.getEmail() + "'";
+                    sql += " AND Email = '" + u.getEmail() + "'";
                 }
                 if (u.getContrasena() != null && !u.getContrasena().isEmpty()) {
-                    sql += " AND contrasena = '" + u.getContrasena() + "'";
+                    sql += " AND Contrasena = '" + u.getContrasena() + "'";
                 }
                 if (u.getDni() != null && !u.getDni().isEmpty()) {
-                    sql += " AND dni = '" + u.getDni() + "'";
+                    sql += " AND DNI = '" + u.getDni() + "'";
                 }
                 if (u.getTelefono() != null && !u.getTelefono().isEmpty()) {
-                    sql += " AND telefono = '" + u.getTelefono() + "'";
+                    sql += " AND Telefono = '" + u.getTelefono() + "'";
                 }
                 if (u.getDireccion() != null && !u.getDireccion().isEmpty()) {
-                    sql += " AND direccion = '" + u.getDireccion() + "'";
+                    sql += " AND Direccion = '" + u.getDireccion() + "'";
                 }
             }
 
@@ -93,13 +93,13 @@ public class UsuariosDao implements iDao {
 
             while (rs.next()) {
                 Usuarios usuario = new Usuarios();
-                usuario.setId_usuario(rs.getInt("id_usuario"));
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setContrasena(rs.getString("contrasena"));
-                usuario.setDni(rs.getString("dni"));
-                usuario.setTelefono(rs.getString("telefono"));
-                usuario.setDireccion(rs.getString("direccion"));
+                usuario.setId_usuario(rs.getInt("ID_Usuario"));
+                usuario.setNombre(rs.getString("Nombre"));
+                usuario.setEmail(rs.getString("Email"));
+                usuario.setContrasena(rs.getString("Contrasena"));
+                usuario.setDni(rs.getString("DNI"));
+                usuario.setTelefono(rs.getString("Telefono"));
+                usuario.setDireccion(rs.getString("Direccion"));
 
                 lista.add(usuario);
             }

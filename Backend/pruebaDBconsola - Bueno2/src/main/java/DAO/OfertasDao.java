@@ -18,10 +18,10 @@ public class OfertasDao implements iDao {
     public int add(Object bean) {
         Ofertas oferta = (Ofertas) bean;
 
-        // Convertir java.util.Date a java.sql.Date
+        // Convierto java.util.Date a java.sql.Date
         Date sqlDate = new Date(oferta.getFechaExpiracion().getTime());
 
-        String sql = "INSERT INTO Ofertas (nombre, precio, descripcion, columnaImagen, fechaExpiracion) VALUES ('" +
+        String sql = "INSERT INTO Ofertas (Nombre, Precio, Descripcion, columnaImagen, fechaExpiracion) VALUES ('" +
                 oferta.getNombre() + "', " +
                 oferta.getPrecio() + ", '" +
                 oferta.getDescripcion() + "', '" +
@@ -35,7 +35,7 @@ public class OfertasDao implements iDao {
     @Override
     public int delete(Object e) {
         Ofertas oferta = (Ofertas) e;
-        String sql = "DELETE FROM Ofertas WHERE id_oferta = " + oferta.getId_oferta();
+        String sql = "DELETE FROM Ofertas WHERE ID_Oferta = " + oferta.getId_oferta();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
@@ -46,12 +46,12 @@ public class OfertasDao implements iDao {
         Date sqlDate = new Date(oferta.getFechaExpiracion().getTime());
 
         String sql = "UPDATE Ofertas SET " +
-                "nombre = '" + oferta.getNombre() + "', " +
-                "precio = " + oferta.getPrecio() + ", " +
-                "descripcion = '" + oferta.getDescripcion() + "', " +
+                "Nombre = '" + oferta.getNombre() + "', " +
+                "Precio = " + oferta.getPrecio() + ", " +
+                "Descripcion = '" + oferta.getDescripcion() + "', " +
                 "columnaImagen = '" + oferta.getColumnaImagen() + "', " +
                 "fechaExpiracion = '" + sqlDate + "' " +
-                "WHERE id_oferta = " + oferta.getId_oferta();
+                "WHERE ID_Oferta = " + oferta.getId_oferta();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -72,14 +72,13 @@ public class OfertasDao implements iDao {
                     sql += " AND ID_Oferta = " + oferta.getId_oferta();
                 }
                 if (oferta.getNombre() != null && !oferta.getNombre().isEmpty()) {
-                    sql += " AND nombre = '" + oferta.getNombre() + "'";
+                    sql += " AND Nombre = '" + oferta.getNombre() + "'";
                 }
-                // Cambia esta condición para que solo filtre si precio es mayor que cero:
                 if (oferta.getPrecio() > 0) {
-                    sql += " AND precio = " + oferta.getPrecio();
+                    sql += " AND Precio = " + oferta.getPrecio();
                 }
                 if (oferta.getDescripcion() != null && !oferta.getDescripcion().isEmpty()) {
-                    sql += " AND descripcion = '" + oferta.getDescripcion() + "'";
+                    sql += " AND Descripcion = '" + oferta.getDescripcion() + "'";
                 }
                 if (oferta.getColumnaImagen() != null && !oferta.getColumnaImagen().isEmpty()) {
                     sql += " AND columnaImagen = '" + oferta.getColumnaImagen() + "'";
@@ -89,16 +88,15 @@ public class OfertasDao implements iDao {
                 }
             }
 
-            // Si bean es null, se ejecuta el SQL sin filtros: "SELECT * FROM ofertas WHERE 1=1"
             ResultSet rs = motorSql.executeQuery(sql);
 
             if (rs != null) {
                 while (rs.next()) {
                     Ofertas ofertaBd = new Ofertas();
                     ofertaBd.setId_oferta(rs.getInt("ID_Oferta"));
-                    ofertaBd.setNombre(rs.getString("nombre"));
-                    ofertaBd.setPrecio(rs.getDouble("precio"));
-                    ofertaBd.setDescripcion(rs.getString("descripcion"));
+                    ofertaBd.setNombre(rs.getString("Nombre"));
+                    ofertaBd.setPrecio(rs.getDouble("Precio"));
+                    ofertaBd.setDescripcion(rs.getString("Descripcion"));
                     ofertaBd.setColumnaImagen(rs.getString("columnaImagen"));
                     ofertaBd.setFechaExpiracion(rs.getDate("fechaExpiracion"));
 

@@ -22,13 +22,10 @@ public class ProductosService extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        String pathInfo = req.getPathInfo(); // ej: /1 o null
+        String pathInfo = req.getPathInfo();
         String categoriaStr = req.getParameter("categoria");
 
         Gson gson = new Gson();
@@ -54,7 +51,7 @@ public class ProductosService extends HttpServlet {
             int id = Integer.parseInt(pathInfo.substring(1));
             if (id <= 0) throw new NumberFormatException();
 
-            // 🔥 Aquí se busca el producto por ID
+            //Aquí se busca el producto por ID
             Productos filtro = new Productos();
             filtro.setId_producto(id);
 
@@ -63,7 +60,7 @@ public class ProductosService extends HttpServlet {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 resp.getWriter().write("{}"); // vacío pero válido
             } else {
-                String json = gson.toJson(productos.get(0)); // solo uno
+                String json = gson.toJson(productos.get(0));
                 resp.getWriter().write(json);
             }
 

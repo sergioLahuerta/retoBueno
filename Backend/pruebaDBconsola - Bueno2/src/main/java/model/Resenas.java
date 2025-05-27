@@ -53,11 +53,11 @@ public class Resenas {
     @Override
     public String toString() {
         return "Resenas{" +
-                "id_resena=" + id_resena +
-                ", id_usuario=" + id_usuario +
-                ", id_restaurante=" + id_restaurante +
-                ", valoracion=" + valoracion +
-                ", fecha=" + fecha +
+                "ID_Resena=" + id_resena +
+                ", ID_Usuario=" + id_usuario +
+                ", ID_Restaurante=" + id_restaurante +
+                ", Valoracion=" + valoracion +
+                ", Fecha=" + fecha +
                 '}';
     }
 }

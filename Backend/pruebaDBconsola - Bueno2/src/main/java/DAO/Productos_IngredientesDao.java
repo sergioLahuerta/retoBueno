@@ -17,7 +17,7 @@ public class Productos_IngredientesDao implements iDao {
     @Override
     public int add(Object bean) {
         Productos_Ingredientes pi = (Productos_Ingredientes) bean;
-        String sql = "INSERT INTO Productos_Ingredientes (id_ingrediente, id_producto, cantidad) VALUES (" +
+        String sql = "INSERT INTO Productos_Ingredientes (ID_Ingrediente, ID_Producto, Cantidad) VALUES (" +
                 pi.getId_ingrediente() + ", " +
                 pi.getId_producto() + ", " +
                 pi.getCantidad() + ")";
@@ -37,9 +37,9 @@ public class Productos_IngredientesDao implements iDao {
     public int update(Object bean) {
         Productos_Ingredientes pi = (Productos_Ingredientes) bean;
         String sql = "UPDATE Productos_Ingredientes SET " +
-                "id_ingrediente = " + pi.getId_ingrediente() + ", " +
-                "id_producto = " + pi.getId_producto() + ", " +
-                "cantidad = " + pi.getCantidad() +
+                "ID_Ingrediente = " + pi.getId_ingrediente() + ", " +
+                "ID_Producto = " + pi.getId_producto() + ", " +
+                "Cantidad = " + pi.getCantidad() +
                 " WHERE ID_ProductoIngrediente = " + pi.getId_productoIngrediente();
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -60,10 +60,10 @@ public class Productos_IngredientesDao implements iDao {
                     sql += " AND ID_ProductoIngrediente = " + pi.getId_productoIngrediente();
                 }
                 if (pi.getId_ingrediente() > 0) {
-                    sql += " AND id_ingrediente = " + pi.getId_ingrediente();
+                    sql += " AND ID_Ingrediente = " + pi.getId_ingrediente();
                 }
                 if (pi.getId_producto() > 0) {
-                    sql += " AND id_producto = " + pi.getId_producto();
+                    sql += " AND ID_Producto = " + pi.getId_producto();
                 }
             }
 
@@ -73,9 +73,9 @@ public class Productos_IngredientesDao implements iDao {
                 while (rs.next()) {
                     Productos_Ingredientes piBd = new Productos_Ingredientes();
                     piBd.setId_productoIngrediente(rs.getInt("ID_ProductoIngrediente"));
-                    piBd.setId_ingrediente(rs.getInt("id_ingrediente"));
-                    piBd.setId_producto(rs.getInt("id_producto"));
-                    piBd.setCantidad(rs.getDouble("cantidad"));
+                    piBd.setId_ingrediente(rs.getInt("ID_Ingrediente"));
+                    piBd.setId_producto(rs.getInt("ID_Producto"));
+                    piBd.setCantidad(rs.getDouble("Cantidad"));
 
                     lista.add(piBd);
                 }

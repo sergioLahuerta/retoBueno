@@ -3,30 +3,35 @@ package DAO;
 import model.DetallesPedidos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DetallesPedidosDao implements iDao<DetallesPedidos, Integer> {
 
-    private final String SQL_FIND = "SELECT * FROM detalles_pedidos WHERE 1=1";
+    private final String SQL_FIND = "SELECT * FROM Detalles_Pedidos WHERE 1=1";
     private IMotorSql motorSql;
 
     public DetallesPedidosDao() {
         motorSql = new MotorSql();
     }
 
-    public int add(DetallesPedidos bean, Connection conn) {
-        String sql = "INSERT INTO detalles_pedidos (id_pedido, id_producto, cantidad, precioUnidad, observaciones) VALUES (" +
-                bean.getId_pedido() + ", " +
-                bean.getId_producto() + ", " +
-                bean.getCantidad() + ", " +
-                bean.getPrecioUnidad() + ", '" +
-                bean.getObservaciones() + "')";
+    public static int add(DetallesPedidos bean, Connection conn) {
+        String sql = "INSERT INTO Detalles_Pedidos (ID_Pedido, ID_Producto, Cantidad, Observaciones) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, bean.getId_pedido());
+            ps.setInt(2, bean.getId_producto());
+            ps.setInt(3, bean.getCantidad());
+            ps.setString(4, bean.getObservaciones());
 
-        motorSql.connect();
-        return motorSql.executeUpdate(sql);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al insertar DetallesPedidos: " + e.getMessage());
+            return -1;
+        }
     }
+
 
     @Override
     public int add(DetallesPedidos bean) {
@@ -35,20 +40,19 @@ public class DetallesPedidosDao implements iDao<DetallesPedidos, Integer> {
 
     @Override
     public int delete(Integer idDetalle) {
-        String sql = "DELETE FROM detalles_pedidos WHERE id_detallePedido = " + idDetalle;
+        String sql = "DELETE FROM Detalles_Pedidos WHERE ID_DetallePedido = " + idDetalle;
         motorSql.connect();
         return motorSql.executeUpdate(sql);
     }
 
     @Override
     public int update(DetallesPedidos bean) {
-        String sql = "UPDATE detalles_pedidos SET " +
-                "id_pedido = " + bean.getId_pedido() + ", " +
-                "id_producto = " + bean.getId_producto() + ", " +
-                "cantidad = " + bean.getCantidad() + ", " +
-                "precioUnidad = " + bean.getPrecioUnidad() + ", " +
-                "observaciones = '" + bean.getObservaciones() + "' " +
-                "WHERE id_detallePedido = " + bean.getId_detallePedido();
+        String sql = "UPDATE Detalles_Pedidos SET " +
+                "ID_Pedido = " + bean.getId_pedido() + ", " +
+                "ID_Producto = " + bean.getId_producto() + ", " +
+                "Cantidad = " + bean.getCantidad() + ", " +
+                "Observaciones = '" + bean.getObservaciones() + "' " +
+                "WHERE ID_DetallePedido = " + bean.getId_detallePedido();
 
         motorSql.connect();
         return motorSql.executeUpdate(sql);
@@ -61,22 +65,19 @@ public class DetallesPedidosDao implements iDao<DetallesPedidos, Integer> {
 
         if (filtro != null) {
             if (filtro.getId_detallePedido() > 0) {
-                sql += " AND id_detallePedido = " + filtro.getId_detallePedido();
+                sql += " AND ID_DetallePedido = " + filtro.getId_detallePedido();
             }
             if (filtro.getId_pedido() > 0) {
-                sql += " AND id_pedido = " + filtro.getId_pedido();
+                sql += " AND ID_Pedido = " + filtro.getId_pedido();
             }
             if (filtro.getId_producto() > 0) {
-                sql += " AND id_producto = " + filtro.getId_producto();
+                sql += " AND ID_Producto = " + filtro.getId_producto();
             }
             if (filtro.getCantidad() > 0) {
-                sql += " AND cantidad = " + filtro.getCantidad();
-            }
-            if (filtro.getPrecioUnidad() > 0) {
-                sql += " AND precioUnidad = " + filtro.getPrecioUnidad();
+                sql += " AND Cantidad = " + filtro.getCantidad();
             }
             if (filtro.getObservaciones() != null && !filtro.getObservaciones().isEmpty()) {
-                sql += " AND observaciones LIKE '%" + filtro.getObservaciones() + "%'";
+                sql += " AND Observaciones LIKE '%" + filtro.getObservaciones() + "%'";
             }
         }
 
@@ -86,17 +87,16 @@ public class DetallesPedidosDao implements iDao<DetallesPedidos, Integer> {
 
             while (rs != null && rs.next()) {
                 DetallesPedidos dp = new DetallesPedidos();
-                dp.setId_detallePedido(rs.getInt("id_detallePedido"));
-                dp.setId_pedido(rs.getInt("id_pedido"));
-                dp.setId_producto(rs.getInt("id_producto"));
-                dp.setCantidad(rs.getInt("cantidad"));
-                dp.setPrecioUnidad(rs.getDouble("precioUnidad"));
-                dp.setObservaciones(rs.getString("observaciones"));
+                dp.setId_detallePedido(rs.getInt("ID_DetallePedido"));
+                dp.setId_pedido(rs.getInt("ID_Pedido"));
+                dp.setId_producto(rs.getInt("ID_Producto"));
+                dp.setCantidad(rs.getInt("Cantidad"));
+                dp.setObservaciones(rs.getString("Observaciones"));
 
                 lista.add(dp);
             }
         } catch (SQLException e) {
-            System.out.println("Error en FindAll DetallesPedidos: " + e.getMessage());
+            System.out.println("Error en FindAll Detalles_Pedidos: " + e.getMessage());
         }
 
         return lista;

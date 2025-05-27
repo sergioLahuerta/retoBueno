@@ -42,10 +42,10 @@ public class Proveedores {
     @Override
     public String toString() {
         return "Proveedores{" +
-                "id_proveedor=" + id_proveedor +
-                ", nombreEmpresa='" + nombreEmpresa + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", email='" + email + '\'' +
+                "ID_Proveedor=" + id_proveedor +
+                ", NombreEmpresa='" + nombreEmpresa + '\'' +
+                ", Telefono='" + telefono + '\'' +
+                ", Email='" + email + '\'' +
                 '}';
     }
 }
