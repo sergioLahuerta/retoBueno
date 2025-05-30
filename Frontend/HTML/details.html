@@ -1,8 +1,3 @@
-<!--PARA HACER:
-  1- Descargar fuente y meterla en otro css como en el video (Dalto)
-  2-
--->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +11,7 @@
       <script src="../JS/sign-up.js" defer></script>
       <script src="../JS/footer.js" defer></script>
       <script src="../JS/change-ingredients.js" defer></script>
-      <script src="../JS/fetch.js" defer></script>
+      
       <script src="../JS/addToChart.js" defer></script>
       <title>Meat & Grill</title>
   </head>
@@ -113,6 +108,7 @@
             </a>
             <li class="list-item-ul-cart">
                 <img src="../src/icons/cartWhite.png" alt="" class="list-item-ul-cart">
+                <span class="cart-count">0</span>
                 <div class="cart-panel">
                     <p class="cart-title">Your Cart</p>
                     <ul class="cart-items-list">
@@ -151,11 +147,11 @@
     </header>
 
     <!--Sección Sing up-->
-    <img src="/Proyecto/Frontend/Web/src/icons/crossWhite.png" id="signup-close-btn" class="signup-close-btn">
+    <img src="../src/icons/crossWhite.png" id="signup-close-btn" class="signup-close-btn">
     <div id="background-grey" class="background-layer-grey"></div>
     <div id="signup-id" class="signup-section">
       <div class="signup-container">
-        <img src="/Proyecto/Frontend/Web/src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
+        <img src="../src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
         <div class="sign-up-info-container">
           <h2 class="sign-up-info-title">M&G REWARDS ARE WAITING FOR YOU</h2>
           <p class="sign-up-info-subtitle">Sign up to get discount codes, free shipping, exclusive products, and earn MeatPoints!</p>
@@ -180,11 +176,11 @@
     </div>
     
      <!--Sección Log In-->
-     <img src="/Proyecto/Frontend/Web/src/icons/crossWhite.png" id="login-close-btn" class="signup-close-btn">
+     <img src="../src/icons/crossWhite.png" id="login-close-btn" class="signup-close-btn">
      <div id="background-grey" class="background-layer-grey"></div>
      <div id="login-id" class="signup-section">
        <div class="signup-container">
-         <img src="/Proyecto/Frontend/Web/src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
+         <img src="../src/icons/logo-favicon-club-new.png" alt="" class="sign-up-header-img">
          <div class="sign-up-info-container">
            <h2 class="sign-up-info-title">WELCOME BACK TO M&G CLUB</h2>
            <p class="sign-up-info-subtitle">Log in to get discount codes, free shipping, exclusive products, and earn MeatPoints!</p>
@@ -220,7 +216,7 @@
        <p class="details-price"></p>
      </div> 
      <div id="ingredients-list-panel" class="ingredients-list-panel hidden">
-       <p>Select ingredients to remove:</p>
+       <p id="ingredients-list-panel-p">Select ingredients to remove:</p>
        <div class="ingredient-options"></div>
      </div>
      <input id="details-toggle-buy" type="checkbox" class="details-input-purchase" hidden>
@@ -229,7 +225,7 @@
        <p>Do you want to change 1 or more ingredients?</p>
        <div class="details-pannel-choice-container">
          <button id="change-ingredients-btn" class="details-pannel-choice-ingredients">Change ingredients</button>
-         <button id="btn-normal" class="details-pannel-choice-ingredients">I'm normal</button>
+         <button id="btn-normal" class="details-pannel-choice-ingredients">To chart</button>
        </div>
      </div>
    </div>
@@ -239,7 +235,7 @@
     <!--Sección de información del delivery-->
       <section class="section-delivery-info">
         <div class="delivery-img-container">
-          <img src="/Proyecto/Frontend/Web/src/products/backgrounds/scooter.png" alt="" class="delivery-img">
+          <img src="../src/products/backgrounds/scooter.png" alt="" class="delivery-img">
         </div>
         <div class="delivery-title-container">
           <p class="title delivery-title">Free delivery on orders over $30</p>
@@ -248,7 +244,7 @@
             <p class="delivery-text">Place your order and we’ll handle the shipping – FREE over $30.</p>
         </div>
         <p class="delivery-subtext">All deliveries made with electric scooters – 0% emissions.</p>
-        <button class="button-delivery-info" onclick="window.location.href='/Proyecto/Frontend/Web/HTML/sustainability.html#scooter-sustainability'">
+        <button class="button-delivery-info" onclick="window.location.href='./sustainability.html#scooter-sustainability'">
           View details!
         </button>
       </section>
@@ -339,5 +335,6 @@
             <p class="footer-legal-info-p">2025 Meat & Grill. All Rights Reserved</p>
           </div>
       </section>
+      <script src="../JS/fetch.js"></script>
   </body>
 </html>

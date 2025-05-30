@@ -1,22 +1,51 @@
-// === FUNCIONES GLOBALES DEL CARRITO ===
+// ============================
+// FUNCIONES DE GESTIÓN CARRITO
+// ============================
 function obtenerCarrito() {
-  const carritoJSON = localStorage.getItem('carrito');
-  return carritoJSON ? JSON.parse(carritoJSON) : [];
+  try {
+    const carritoJSON = localStorage.getItem('carrito');
+    return carritoJSON ? JSON.parse(carritoJSON) : [];
+  } catch (error) {
+    console.error('Error al obtener el carrito:', error);
+    return [];
+  }
 }
 
 function guardarCarrito(carrito) {
-  localStorage.setItem('carrito', JSON.stringify(carrito));
+  try {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  } catch (error) {
+    console.error('Error al guardar el carrito:', error);
+  }
 }
 
 function agregarAlCarrito(producto) {
-  let carrito = obtenerCarrito();
-  const index = carrito.findIndex(item => item.id_producto === producto.id_producto);
+  const carrito = obtenerCarrito();
+  const index = carrito.findIndex(
+    item => item.id_producto === producto.id_producto && item.observaciones === producto.observaciones
+  );
+
   if (index !== -1) {
     carrito[index].cantidad += producto.cantidad;
   } else {
     carrito.push(producto);
   }
+
   guardarCarrito(carrito);
+}
+
+function modificarCantidad(id_producto, cambio, observaciones = '') {
+  const carrito = obtenerCarrito();
+  const index = carrito.findIndex(
+    item => item.id_producto === id_producto && (item.observaciones || '') === observaciones
+  );
+
+  if (index !== -1) {
+    carrito[index].cantidad += cambio;
+    if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+    guardarCarrito(carrito);
+    actualizarCarritoDOM();
+  }
 }
 
 function calcularTotal() {
@@ -24,170 +53,185 @@ function calcularTotal() {
   return carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
 }
 
-function modificarCantidad(id_producto, cambio) {
-  let carrito = obtenerCarrito();
-  const index = carrito.findIndex(p => p.id_producto === id_producto);
-
-  if (index !== -1) {
-    carrito[index].cantidad += cambio;
-
-    if (carrito[index].cantidad <= 0) {
-      carrito.splice(index, 1); // elimina producto si cantidad es 0
-    }
-
-    guardarCarrito(carrito);
-    actualizarCarritoDOM();
-  }
+function getIdFromUrl() {
+  return new URLSearchParams(window.location.search).get('id');
 }
 
-// Pintar el carrito con funcionalidad de las imagenes de los iconos mas y menos para que respectivamente aumente y reduzca la cantidad del producto deseado.
+// ============================
+// FUNCIONES DE UI
+// ============================
+function cerrarPopupIngredientes() {
+  const panel = document.getElementById('ingredient-choice-panel');
+  if (panel) panel.style.display = 'none';
+}
+
 function actualizarCarritoDOM() {
   const carrito = obtenerCarrito();
-  const listaCarrito = document.querySelector('.cart-items-list');
+  const lista = document.querySelector('.cart-items-list');
   const totalSpan = document.querySelector('.cart-total span:last-child');
   const contador = document.querySelector('.cart-count');
 
-  if (listaCarrito && totalSpan) {
-    listaCarrito.innerHTML = '';
+  if (!lista || !totalSpan) return;
 
-    carrito.forEach(item => {
-      const li = document.createElement('li');
-      li.className = 'cart-item';
-      li.dataset.idProducto = item.id_producto;
+  lista.innerHTML = '';
 
-      li.innerHTML = `
-        <span>${item.nombre} x${item.cantidad}</span>
+  carrito.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.dataset.idProducto = item.id_producto;
+    li.dataset.observaciones = item.observaciones || '';
+
+    li.innerHTML = `
+      <span>${item.nombre} x${item.cantidad}${item.observaciones ? ` (${item.observaciones})` : ''}</span>
+      <div class="cart-img-icons-container">
         <img src="../src/icons/menos.png" alt="Restar" class="cart-img-icons icon-menos">
         <img src="../src/icons/mas.png" alt="Sumar" class="cart-img-icons icon-mas">
-        <span>€${(item.precio * item.cantidad).toFixed(2)}</span>
-      `;
+      </div>
+      <span>€${(item.precio * item.cantidad).toFixed(2)}</span>
+    `;
 
-      listaCarrito.appendChild(li);
-    });
+    lista.appendChild(li);
+  });
 
-    
-    document.querySelectorAll('.icon-menos').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const li = e.target.closest('li.cart-item');
-        const id = parseInt(li.dataset.idProducto);
-        modificarCantidad(id, -1);
-      });
-    });
+  // Delegación de eventos
+  document.querySelectorAll('.icon-menos').forEach(btn => {
+    btn.onclick = e => {
+      const li = e.target.closest('li.cart-item');
+      modificarCantidad(parseInt(li.dataset.idProducto), -1, li.dataset.observaciones || '');
+    };
+  });
 
-    document.querySelectorAll('.icon-mas').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const li = e.target.closest('li.cart-item');
-        const id = parseInt(li.dataset.idProducto);
-        modificarCantidad(id, 1);
-      });
-    });
+  document.querySelectorAll('.icon-mas').forEach(btn => {
+    btn.onclick = e => {
+      const li = e.target.closest('li.cart-item');
+      modificarCantidad(parseInt(li.dataset.idProducto), 1, li.dataset.observaciones || '');
+    };
+  });
 
-    totalSpan.innerText = `€${calcularTotal().toFixed(2)}`;
-  }
-
-  if (contador) {
-    contador.textContent = carrito.length;
-  }
+  totalSpan.innerText = `€${calcularTotal().toFixed(2)}`;
+  if (contador) contador.textContent = carrito.length;
 }
 
-function getIdFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('id');
-}
-
-function cerrarPopupIngredientes() {
-  const panel = document.getElementById('ingredient-choice-panel');
-  const popup = panel?.closest('.details-card-container');
-  if (popup) popup.classList.add('hidden');
-}
-
-// === LÓGICA DOM ===
+// ============================
+// EVENTOS AL CARGAR LA PÁGINA
+// ============================
 document.addEventListener('DOMContentLoaded', () => {
   actualizarCarritoDOM();
 
+  // Abrir panel de ingredientes
+  const btnMostrarIngredientes = document.querySelector('.details-button-purchase');
+  if (btnMostrarIngredientes) {
+    btnMostrarIngredientes.onclick = () => {
+      const panel = document.getElementById('ingredient-choice-panel');
+      if (panel) panel.style.display = 'flex';
+    };
+  }
+
+  // Botón normal sin ingredientes
   const btnNormal = document.getElementById('btn-normal');
   if (btnNormal) {
-    btnNormal.addEventListener('click', () => {
-      const nombre = document.querySelector('.details-name-product').innerText.trim();
-      const precioText = document.querySelector('.details-price').innerText.trim();
+    btnNormal.onclick = () => {
+      const nombre = document.querySelector('.details-name-product')?.innerText.trim();
+      const precioText = document.querySelector('.details-price')?.innerText.trim();
       const precio = parseFloat(precioText.replace(/[^\d.,]/g, '').replace(',', '.')) || 0;
       const id = getIdFromUrl();
 
-      if (!nombre || !precio || !id) {
-        console.error('No se pudo obtener nombre, precio o ID del producto');
-        return;
-      }
+      if (!nombre || !precio || !id) return console.error('Datos inválidos del producto.');
 
-      const producto = {
+      agregarAlCarrito({ id_producto: Number(id), nombre, precio, cantidad: 1 });
+      actualizarCarritoDOM();
+      cerrarPopupIngredientes();
+    };
+  }
+
+  // Botón aceptar con ingredientes personalizados
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'btn-accept-ingredients') {
+      const nombre = document.querySelector('.details-name-product')?.innerText.trim();
+      const precioText = document.querySelector('.details-price')?.innerText.trim();
+      const precio = parseFloat(precioText.replace(/[^\d.,]/g, '').replace(',', '.')) || 0;
+      const id = getIdFromUrl();
+
+      if (!nombre || !precio || !id) return console.error('Faltan datos del producto');
+
+      const noIngredientes = Array.from(document.querySelectorAll('.ingredient-checkbox input[type="checkbox"]'))
+        .filter(input => input.checked)
+        .map(input => input.value.trim());
+
+      const observaciones = noIngredientes.length > 0 ? `with no ${noIngredientes.join(', ')}` : '';
+
+      agregarAlCarrito({
         id_producto: Number(id),
         nombre,
         precio,
-        cantidad: 1
-      };
+        cantidad: 1,
+        observaciones
+      });
 
-      agregarAlCarrito(producto);
       actualizarCarritoDOM();
       cerrarPopupIngredientes();
-    });
-  }
+      const ingBox = document.querySelector('.ingredient-options');
+      if (ingBox) ingBox.style.display = 'none';
 
+      const selectIngText = document.getElementById('ingredients-list-panel-p');
+      if (selectIngText) selectIngText.style.display = 'none';
+      }
+  });
+
+  // ============================
+  // ENVÍO DEL PEDIDO
+  // ============================
   const checkoutBtn = document.querySelector('.cart-checkout-btn');
   if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', async () => {
+    checkoutBtn.onclick = async () => {
       const carrito = obtenerCarrito();
-
-      if (carrito.length === 0) {
-        alert("El carrito está vacío.");
-        return;
-      }
+      if (carrito.length === 0) return alert("El carrito está vacío.");
 
       const nombre = prompt("Introduce tu nombre:");
       const email = prompt("Introduce tu email:");
       const metodoPago = prompt("Método de pago (TARJETA o EFECTIVO):");
-      const id_restaurante = 1;
 
       if (!nombre || !email || !metodoPago) {
-        alert("Por favor completa todos los datos.");
-        return;
+        return alert("Por favor completa todos los datos.");
       }
 
       const productosFormateados = carrito.map(item => ({
-        id: item.id_producto,
+        id_producto: item.id_producto,
         cantidad: item.cantidad,
         observaciones: item.observaciones || ""
       }));
 
       const payload = {
-        nombre,
-        email,
-        id_restaurante,
-        metodoPago,
+        nombre: nombre,
+        email: email,
+        id_restaurante: 1,
+        metodoPago: metodoPago,
         productos: productosFormateados
       };
+      console.log("Payload enviado:", JSON.stringify(payload, null, 2));
+
 
       try {
-        const res = await fetch("http://localhost:8080/pruebaDBConsola/realizar-pedido", {
+        const res = await fetch("http://3.232.93.217:8080/realizar-pedido", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
 
         const text = await res.text();
-
         if (res.ok) {
           alert("Pedido realizado con éxito.");
           localStorage.removeItem('carrito');
           actualizarCarritoDOM();
         } else {
+          console.error("Respuesta del servidor:", text);
           alert("Error: " + text);
         }
 
       } catch (err) {
-        console.error("Error en la conexión:", err);
+        console.error("Error de red:", err);
         alert("No se pudo conectar con el servidor.");
       }
-    });
+    };
   }
 });

@@ -109,6 +109,6 @@ public class CompraService {
 
 
     private static int generarNumeroPedido() {
-        return (int) (Math.random() * 1000000);
+        return (int) (Math.random() * 900000) + 1;
     }
 }

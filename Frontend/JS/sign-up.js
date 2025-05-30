@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const backdrop = document.getElementById('background-grey');
 
   closeBtn.addEventListener('mouseover', () => {
-    closeBtn.src = '/Proyecto/Frontend/Web/src/icons/crossRed.png';
+    closeBtn.src = '../src/icons/crossRed.png';
   });
 
   closeBtn.addEventListener('mouseout', () => {
-    closeBtn.src = '/Proyecto/Frontend/Web/src/icons/crossWhite.png';
+    closeBtn.src = '../src/icons/crossWhite.png';
   });
 
   openBtn.addEventListener('click', () => {
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const backdrop = document.getElementById('background-grey');
 
   closeBtn.addEventListener('mouseover', () => {
-    closeBtn.src = '/Proyecto/Frontend/Web/src/icons/crossRed.png';
+    closeBtn.src = '../src/icons/crossRed.png';
   });
 
   closeBtn.addEventListener('mouseout', () => {
-    closeBtn.src = '/Proyecto/Frontend/Web/src/icons/crossWhite.png';
+    closeBtn.src = '../src/icons/crossWhite.png';
   });
 
   openBtn.addEventListener('click', () => {

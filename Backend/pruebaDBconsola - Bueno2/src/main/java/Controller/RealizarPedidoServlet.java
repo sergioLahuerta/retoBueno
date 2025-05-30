@@ -60,7 +60,7 @@ public class RealizarPedidoServlet extends HttpServlet {
                     return;
                 }
                 DetallesPedidos detalle = new DetallesPedidos();
-                detalle.setId_producto(1); // ← ID forzado para pruebas
+                detalle.setId_producto(producto.id_producto);
                 detalle.setCantidad(producto.cantidad);
                 detalle.setObservaciones(producto.observaciones != null ? producto.observaciones.trim() : "");
                 Carrito.agregar(detalle);

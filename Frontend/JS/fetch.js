@@ -180,7 +180,8 @@ cargarRestaurantes();
 //DEATLLES
 function getIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  return params.get('id');
+  const id = parseInt(params.get('id'));
+  return isNaN(id) ? null : id;
 }
 
 async function cargarProductoDetalles() {
@@ -203,21 +204,21 @@ async function cargarProductoDetalles() {
 }
 
 function mostrarProducto(producto) {
-  const carpetasPorCategoria = {
-    1: 'burgers',
-    2: 'drinks',
-    3: 'sides',
-    4: 'desserts'
-  };
+  const img = document.querySelector('.details-img');
+  const nombre = document.querySelector('.details-name-product');
+  const subtext = document.querySelector('.details-subtext-product');
+  const descripcion = document.querySelector('.details-description-product');
+  const precio = document.querySelector('.details-price');
 
-  const carpeta = carpetasPorCategoria[producto.id_categoria] || 'default';
+  if (img) {
+    img.src = `../src/products/burgers/${producto.id_producto}.png`;
+    img.alt = producto.nombre;
+  }
 
-  document.querySelector('.details-img').src = `../src/products/burgers/${producto.id_producto}.png`;
-  document.querySelector('.details-img').alt = producto.nombre;
-  document.querySelector('.details-name-product').innerText = producto.nombre;
-  document.querySelector('.details-subtext-product').innerText = '';
-  document.querySelector('.details-description-product').innerText = producto.descripcion || 'Sin descripción';
-  document.querySelector('.details-price').innerText = producto.precio ? `${producto.precio.toFixed(2)} €` : '';
+  if (nombre) nombre.innerText = producto.nombre;
+  if (subtext) subtext.innerText = '';
+  if (descripcion) descripcion.innerText = producto.descripcion || 'Sin descripción';
+  if (precio) precio.innerText = producto.precio ? `${producto.precio.toFixed(2)} €` : '';
 }
 cargarProductoDetalles();
 
@@ -258,14 +259,207 @@ async function cargarIngredientesDelProducto() {
       label.className = "ingredient-checkbox";
 
       label.innerHTML = `
-        <input type="checkbox" name="ingredient" value="${ing.id_ingrediente}">
+        <input type="checkbox" name="ingredient" value="${ing.nombre}">
         ${ing.nombre}
       `;
 
       container.appendChild(label);
     });
+
+    const submitBtn = document.createElement("button");
+    submitBtn.id = "btn-accept-ingredients";
+    submitBtn.textContent = "Submit";
+    submitBtn.classList.add("details-button-purchase");
+
+container.appendChild(submitBtn);
+
   } catch (error) {
     console.error("Error al cargar ingredientes:", error);
   }
 }
 cargarIngredientesDelProducto();
+
+
+//AUTORÍA//
+
+//1
+async function funcionAutoria() {
+  try {
+    const response = await fetch('http://3.232.93.217:8080/api/productos?categoria=1');
+    if (!response.ok) throw new Error('Error con aleatorio');
+
+    const productos = await response.json();
+    console.log('Productos recibidos:', productos);
+
+     function getRandomItem(productos) {
+      return productos[Math.floor(Math.random() * productos.length)];
+    }
+
+    const contenedor = document.getElementById('autoria');
+    if (!contenedor) {
+      console.warn('Contenedor no encontrado, se omite la carga de productos aleatorios.');
+      return;
+    }
+
+    contenedor.innerHTML = ``;
+
+    const aleatorio = getRandomItem(productos);
+
+    const idBurger = aleatorio.id_producto;
+    
+      const card = document.createElement('div');
+      card.className = 'card-product-container';
+
+      card.innerHTML = `
+        <img src="../src/products/burgers/${idBurger}.png" alt="${aleatorio.nombre}" class="img-promo-burger">
+        <div class="info-card-promo-burger">
+          <p class="title-info-card-promo-burger">${aleatorio.nombre}</p>
+          <p class="subtitle-info-card-promo-burger">${aleatorio.descripcion}</p>
+          <button class="button-info-card-promo-burger" onclick="window.location.href='./details.html?id=${aleatorio.id_producto}'">
+            Try it now!
+          </button>
+        </div>
+      `;
+      contenedor.appendChild(card);
+
+  } catch (error) {
+    console.error('Error al traer ofertas:', error);
+  }
+}
+funcionAutoria();
+
+
+
+//2
+async function funcionAutoria2() {
+  try {
+    const response = await fetch('http://3.232.93.217:8080/api/productos?categoria=2');
+    if (!response.ok) throw new Error('Error con aleatorio');
+
+    const productos2 = await response.json();
+    console.log('Productos recibidos:', productos2);
+
+     function getRandomItem(productos2) {
+      return productos2[Math.floor(Math.random() * productos2.length)];
+    }
+
+    const contenedor2 = document.getElementById('autoria2');
+    if (!contenedor2) {
+      console.warn('Contenedor no encontrado, se omite la carga de productos aleatorios.');
+      return;
+    }
+
+    contenedor2.innerHTML = ``;
+
+    const aleatorio2 = getRandomItem(productos2);
+    const idBurger2 = aleatorio2.id_producto;
+    
+      const card2 = document.createElement('div');
+      card2.className = 'card-product-container';
+
+      card2.innerHTML = `
+        <img src="../src/products/burgers/${idBurger2}.png" alt="${aleatorio2.nombre}" class="img-promo-burger">
+        <div class="info-card-promo-burger">
+          <p class="title-info-card-promo-burger">${aleatorio2.nombre}</p>
+          <p class="subtitle-info-card-promo-burger">${aleatorio2.descripcion}</p>
+          <button class="button-info-card-promo-burger" onclick="window.location.href='./details.html?id=${aleatorio2.id_producto}'">
+            Try it now!
+          </button>
+        </div>
+      `;
+      contenedor2.appendChild(card2);
+
+  } catch (error) {
+    console.error('Error al traer ofertas:', error);
+  }
+}
+funcionAutoria2();
+
+
+//3
+async function funcionAutoria3() {
+  try {
+    const response = await fetch('http://3.232.93.217:8080/api/productos?categoria=3');
+    if (!response.ok) throw new Error('Error con aleatorio');
+
+    const productos3 = await response.json();
+    console.log('Productos recibidos:', productos3);
+
+     function getRandomItem(productos3) {
+      return productos3[Math.floor(Math.random() * productos3.length)];
+    }
+
+    const contenedor3 = document.getElementById('autoria3');
+    if (!contenedor3) {
+      console.warn('Contenedor no encontrado, se omite la carga de productos aleatorios.');
+      return;
+    }
+
+    contenedor3.innerHTML = ``;
+
+    const aleatorio3 = getRandomItem(productos3);
+    const idBurger3 = aleatorio3.id_producto;
+    
+      const card3 = document.createElement('div');
+      card3.className = 'card-product-container';
+
+      card3.innerHTML = `
+        <img src="../src/products/burgers/${idBurger3}.png" alt="${aleatorio3.nombre}" class="img-promo-burger">
+        <div class="info-card-promo-burger">
+          <p class="title-info-card-promo-burger">${aleatorio3.nombre}</p>
+          <p class="subtitle-info-card-promo-burger">${aleatorio3.descripcion}</p>
+          <button class="button-info-card-promo-burger" onclick="window.location.href='./details.html?id=${aleatorio3.id_producto}'">
+            Try it now!
+          </button>
+        </div>
+      `;
+      contenedor3.appendChild(card3);
+
+  } catch (error) {
+    console.error('Error al traer ofertas:', error);
+  }
+}
+funcionAutoria3();
+
+function generarNuevoRandom() {
+  try {
+    const boton = document.getElementById('boton');
+    boton.addEventListener('click', () => {
+      funcionAutoria();
+      funcionAutoria2();
+      funcionAutoria3();
+    });
+  } catch {
+    console.log('Error al generar nuevos productos random')
+  }
+}
+generarNuevoRandom();
+
+
+//GESTIONAR CV
+window.addEventListener('DOMContentLoaded', () => {
+  console.log("JS cargado correctamente");
+  document.getElementById('cv').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    console.log("Interceptado el submit");
+    const form = e.target;
+    const formData = new FormData(form);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+    try {
+      const res = await fetch('http://3.232.93.217:8080/api/uploadCV', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      alert(data.message);
+    } catch (err) {
+      console.error(err);
+      alert('Error al subir el archivo');
+    }
+  });
+});
